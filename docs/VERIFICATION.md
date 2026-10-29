@@ -17,12 +17,18 @@ Updated October 28, 2026 (America/New_York).
 | Live ZIP and attachment | Inspected HTML, JSON, manifest, 4 messages and a real downloaded attachment | Passed locally, 0 export warnings |
 | Live forum browsing | Same connected user session: initial25 posts, Load more to50, open thread3 messages, return to forum | Passed; user-reported empty forum fixed |
 | Live archived thread | Discovered populated archived threads, read history and saved a 2-message limited thread archive | Passed; limit and metadata verified |
-| macOS arm64 distributable | Local and native GitHub Actions DMG/ZIP build + packaged app launch | Passed; final forum-fix rebuild pending |
-| macOS Intel distributable | Native GitHub Actions DMG/ZIP build + packaged launch | Passed; final forum-fix rebuild pending |
-| Windows x64 distributable | Native GitHub Actions Setup/portable EXE build + packaged launch | Passed; final forum-fix rebuild pending |
-| Linux x64 distributable | Native GitHub Actions AppImage/DEB build + packaged launch under Xvfb | Passed; final forum-fix rebuild pending |
+| macOS arm64 distributable | Local and native GitHub Actions DMG/ZIP build + packaged app launch | Passed on final forum-fix build |
+| macOS Intel distributable | Native GitHub Actions DMG/ZIP build + packaged launch | Passed on final forum-fix build |
+| Windows x64 distributable | Native GitHub Actions Setup/portable EXE build + packaged launch | Passed on final forum-fix build |
+| Linux x64 distributable | Native GitHub Actions AppImage/DEB build + packaged launch under Xvfb | Passed on final forum-fix build |
 | Apple notarization / Windows publisher signing | Distribution certificates not configured | Not provided |
 
 The initial suite contains 43 API/export/filesystem tests and 5 Electron interaction tests. Counts can change as regressions are added. CI stores per-platform screenshot evidence as artifacts. Fixture tests never establish access to all content of a real account.
 
 A public release is gated on the recorded live verification and successful platform jobs. Source and package preparation may happen privately before that gate. A completed save can contain notices or a requested message limit; inspect the manifest before treating an archive as complete.
+
+## Release build
+
+The final application build is commit `588622601b4be0023dc85951918a56b012070675`, verified in [GitHub Actions run 40802611034](https://github.com/H644b/DisDown/actions/runs/40802611034). All four platform jobs passed build/typecheck, 43 API/export/filesystem tests, 5 Electron UI tests, packaging, and packaged-app launch. Published binaries come from that run. A subsequent documentation-only release commit records these results without changing application code.
+
+The finish review approved the scoped forum extension and resolved the two earlier UI findings. Live checks are bounded and user-token-specific; bot mode is transport-tested, without a supplied live bot token. Packages have ad-hoc macOS integrity signatures; Apple notarization and Windows publisher signing are not provided. Installer creation and packaged executable launches were tested; manual installation UI on every supported OS was not separately exercised.

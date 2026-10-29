@@ -31,6 +31,7 @@ Only provide a token you own or are authorized to use. **Never put a token in an
 
 1. Open DisDown and connect after consenting, or explore the clearly labeled sample workspace.
 2. Use `+` beside servers, categories, channels, DMs, group chats, threads, messages, reactions, authors, attachments, embeds, stickers, polls, message components, roles, emoji, and events. Open a profile or object inspector to select individual returned fields.
+   Forum and media channels open directly to a paged post list. Open a post to read its messages, use **Back to forum** to return, or select the entire post. **Load more posts** continues through active and archived results.
 3. Click **Choose export options** in the persistent collection tray. Choose HTML, JSON, CSV, Markdown, or plain text. Apply UTC date filters, a message phrase, author IDs, or a matching-message limit per channel.
 4. Choose optional threads, reaction counts, author profiles, and attachment downloads. Downloaded attachments require a ZIP bundle.
 5. Click **Save collection**, browse folders in the app, create a folder if needed, then choose the destination. Existing files are replaced only after explicit confirmation. Progress reports real collection, media, and writing phases. Cancelled or failed exports remove their temporary files.
@@ -41,7 +42,7 @@ A broad selection expands during export. A leaf selection keeps its scope: selec
 
 DisDown archives the data Discord returns for the connected account. It cannot retrieve deleted content, unseen private threads, unavailable media, or data blocked by server permissions or API restrictions. It does not record voice/video calls, streams, presence history, or reconstruct every interactive Discord feature. Voice/stage channels can expose metadata and available text history; this is not audio capture.
 
-User DM discovery and extended profiles use undocumented endpoints. Failure is shown as an access notice. Server channel visibility follows guild roles and channel overrides. Active and accessible archived threads are paginated; private-thread permissions may prevent complete discovery. The inspector exposes all fields of the returned object; it does not imply every field available in the official Discord client is accessible through an API.
+User DM discovery, thread search, and extended profiles use undocumented endpoints. Failure is shown as an access notice. Server channel visibility follows guild roles and channel overrides. Active and accessible archived threads are paginated; private-thread permissions may prevent complete discovery. The inspector exposes all fields of the returned object; it does not imply every field available in the official Discord client is accessible through an API.
 
 Large exports are limited to 250,000 distinct messages per job and 512 MB per downloaded file. Use date ranges or smaller selections for larger histories. Permission failures, expired attachments, API failures, and limits are reported in the archive. Do not interpret a finished save as proof that Discord supplied all possible account content.
 
