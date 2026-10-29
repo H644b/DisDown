@@ -49,6 +49,7 @@ import {
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { bridge } from "./bridge";
+import { applyAppearance, appearanceLabel } from "./theme";
 import {
   avatarUrl,
   channelSelection,
@@ -67,6 +68,7 @@ import {
   type ExportOptions,
   type ExportResult,
   type GuildView,
+  type Guild,
   type Message,
   type Progress,
   type Selection,
@@ -95,6 +97,15 @@ function Avatar({ user, size = 38 }: { user: User; size?: number }) {
       style={{
         width: size,
         height: size,
+        color:
+          user.accent_color !== undefined &&
+          ((user.accent_color >> 16) & 255) * 0.299 +
+            ((user.accent_color >> 8) & 255) * 0.587 +
+            (user.accent_color & 255) * 0.114 >
+            150
+            ? "#111214"
+            : "#ffffff",
+
         background: user.accent_color
           ? `#${user.accent_color.toString(16).padStart(6, "0")}`
           : undefined,
@@ -104,6 +115,44 @@ function Avatar({ user, size = 38 }: { user: User; size?: number }) {
         <img src={avatarUrl(user)} alt="" loading="lazy" />
       ) : (
         (user.global_name || user.username).slice(0, 1).toUpperCase()
+      )}
+    </span>
+  );
+}
+function ServerIcon({ guild }: { guild: Guild }) {
+  const [hovered, setHovered] = useState(false);
+  const [failed, setFailed] = useState("");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const format =
+    guild.icon?.startsWith("a_") && hovered && !reduced ? "gif" : "png";
+  const src = guild.icon
+    ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${format}?size=128`
+    : "";
+  const initials =
+    guild.name
+      .split(/\s+/)
+      .filter((word) => !["the", "and"].includes(word.toLowerCase()))
+      .map((word) => [...word][0])
+      .slice(0, 2)
+      .join("") ||
+    [...guild.name][0] ||
+    "?";
+  return (
+    <span
+      className="server-icon"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {src && failed !== src ? (
+        <img
+          src={src}
+          alt=""
+          width={44}
+          height={44}
+          onError={() => setFailed(src)}
+        />
+      ) : (
+        initials
       )}
     </span>
   );
@@ -131,11 +180,7 @@ function Pick({
       }}
       title={`${checked ? "Deselect" : "Select"} ${item.label}`}
     >
-      {checked ? (
-        <Check size={small ? 12 : 14} strokeWidth={3} />
-      ) : (
-        <Plus size={small ? 12 : 14} />
-      )}
+      {checked && <Check size={small ? 12 : 14} strokeWidth={3} />}
     </button>
   );
 }
@@ -267,42 +312,14 @@ function Consent({
   }
   return (
     <main className="welcome">
-      <div className="welcome-copy">
-        <img className="welcome-logo" src="./logo.svg" alt="DisDown logo" />
-        <h1>
-          Good conversations.
-          <br />
-          <span>Yours to keep.</span>
-        </h1>
-        <p>
-          Bring the parts of Discord that matter to you into a place of your
-          own.
-        </p>
-        <div className="welcome-preview">
-          <div>
-            <Hash size={17} />
-            <span>that one conversation</span>
-            <Check size={16} />
-          </div>
-          <div>
-            <MessageCircle size={17} />
-            <span>the weekend plans</span>
-            <Check size={16} />
-          </div>
-          <div>
-            <Paperclip size={17} />
-            <span>your next big idea</span>
-            <Check size={16} />
-          </div>
-        </div>
-        <div className="local-promise">
-          <ShieldCheck size={18} />
-          <span>Local app. Local files. No DisDown server.</span>
-        </div>
-      </div>
       <section className="connect-panel">
-        <h2>Make yourself at home</h2>
-        <p>Connect an account to start choosing what to save.</p>
+        <div className="connect-heading">
+          <img src="./logo.svg" alt="DisDown" />
+          <div>
+            <h1>Connect to Discord</h1>
+            <p>Browse your servers and choose what to export.</p>
+          </div>
+        </div>
         <div className="segmented" aria-label="Token type">
           <button
             aria-pressed={mode === "user"}
@@ -320,7 +337,7 @@ function Consent({
           </button>
         </div>
         <label className="field-label" htmlFor="discord-token">
-          Discord token <LockKeyhole size={13} />
+          Discord token
         </label>
         <div className="token-field">
           <input
@@ -328,7 +345,7 @@ function Consent({
             type={show ? "text" : "password"}
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            placeholder="Paste your token here"
+            placeholder="Paste your token"
             autoComplete="off"
             spellCheck={false}
             disabled={busy}
@@ -338,37 +355,35 @@ function Consent({
           </button>
         </div>
         <p className="field-hint">
-          Used only to connect directly to Discord. Never stored on disk or sent
-          to DisDown.
+          Your token stays in memory and is cleared when you disconnect.
         </p>
-        {mode === "user" ? (
-          <div className="policy-note">
-            <Info size={17} />
-            <p>
-              Discord does not support user-token automation and may terminate
-              accounts that use it.{" "}
-              <button
-                className="text-link"
-                onClick={() =>
-                  void bridge.openExternal(
-                    "https://support.discord.com/hc/en-us/articles/115002192352-Automated-User-Accounts-Self-Bots",
-                  )
-                }
-              >
-                Read Discord’s policy <ExternalLink size={11} />
-              </button>
-            </p>
-          </div>
-        ) : (
-          <div className="policy-note">
-            <Info size={17} />
-            <p>
-              A bot sees only servers it belongs to and content it has
-              permission to read. Personal DMs and group chats are unavailable.
-              Message Content intent may be required.
-            </p>
-          </div>
-        )}
+        <div className="policy-note">
+          <Info size={18} />
+          <p>
+            {mode === "user" ? (
+              <>
+                Discord prohibits user-token automation and may terminate
+                accounts that use it.{" "}
+                <button
+                  className="text-link"
+                  onClick={() =>
+                    void bridge.openExternal(
+                      "https://support.discord.com/hc/en-us/articles/115002192352-Automated-User-Accounts-Self-Bots",
+                    )
+                  }
+                >
+                  Read Discord’s policy <ExternalLink size={12} />
+                </button>
+              </>
+            ) : (
+              <>
+                A bot can read only content it has permission to access.
+                Personal DMs and group chats are unavailable. Message Content
+                intent may be required.
+              </>
+            )}
+          </p>
+        </div>
         <label className="check-label">
           <input
             type="checkbox"
@@ -396,16 +411,14 @@ function Consent({
           disabled={!token || !consent || (mode === "user" && !policy) || busy}
         >
           {busy ? (
-            <LoaderCircle className="spin" size={18} />
-          ) : (
             <>
-              Connect to Discord <ArrowRight size={17} />
+              <LoaderCircle className="spin" size={18} />
+              Connecting…
             </>
+          ) : (
+            "Connect to Discord"
           )}
         </button>
-        <div className="or-divider">
-          <span>or take a look around</span>
-        </div>
         <button
           className="sample-button"
           onClick={() =>
@@ -415,18 +428,61 @@ function Consent({
               .catch((e) => onError(e.message))
           }
         >
-          <Sparkles size={17} /> Explore with sample data{" "}
-          <ArrowRight size={15} />
+          Preview with sample data
         </button>
-        <p className="sample-note">
-          No account needed. Nothing connects to Discord.
-        </p>
+        <div className="connect-footnote">
+          <ShieldCheck size={14} />
+          <span>Read-only access. No DisDown server.</span>
+        </div>
       </section>
     </main>
   );
 }
+
 export default function App() {
   const [session, setSession] = useState<SessionInfo>();
+  const lastThemeSync = useRef(0);
+  const [themeSyncing, setThemeSyncing] = useState(false);
+  useEffect(() => {
+    applyAppearance(session?.appearance);
+    const query = window.matchMedia("(prefers-color-scheme: dark)");
+    const changed = () => applyAppearance(session?.appearance);
+    query.addEventListener("change", changed);
+    return () => query.removeEventListener("change", changed);
+  }, [session?.appearance]);
+  async function syncTheme(quiet = false) {
+    if (session?.mode !== "user") return;
+    const accountId = session.user.id;
+    lastThemeSync.current = Date.now();
+    if (!quiet) setThemeSyncing(true);
+    try {
+      const appearance = await bridge.appearance();
+      const latest = await bridge.session();
+      setSession((previous) =>
+        previous?.user.id === accountId
+          ? {
+              ...previous,
+              appearance,
+              warnings:
+                latest?.user.id === accountId
+                  ? latest.warnings
+                  : previous.warnings,
+            }
+          : previous,
+      );
+    } catch (failure) {
+      if (!quiet) setError((failure as Error).message);
+    } finally {
+      setThemeSyncing(false);
+    }
+  }
+  useEffect(() => {
+    const focus = () => {
+      if (Date.now() - lastThemeSync.current > 60000) void syncTheme(true);
+    };
+    window.addEventListener("focus", focus);
+    return () => window.removeEventListener("focus", focus);
+  }, [session?.user.id]);
   const [step, setStep] = useState(0);
   const [guildId, setGuildId] = useState<string>("");
   const [guild, setGuild] = useState<GuildView>();
@@ -556,6 +612,7 @@ export default function App() {
     }
   }
   function startSession(info: SessionInfo) {
+    lastThemeSync.current = Date.now();
     setSession(info);
     setSelected(new Map());
     setStep(0);
@@ -661,7 +718,11 @@ export default function App() {
         onClick={() => void openChannel(c)}
         title={nameOf(c)}
       >
-        <IconForChannel c={c} size={17} />
+        {c.type === 1 && c.recipients?.[0] ? (
+          <Avatar user={c.recipients[0]} size={28} />
+        ) : (
+          <IconForChannel c={c} size={18} />
+        )}
         <span>{nameOf(c)}</span>
         {c.thread_metadata?.archived && <Archive size={12} />}
       </button>
@@ -682,7 +743,7 @@ export default function App() {
         </div>
         {session && (
           <nav className="steps" aria-label="Export steps">
-            {["Choose", "Configure", "Save"].map((label, i) => (
+            {["Browse", "Export settings", "Save"].map((label, i) => (
               <button
                 key={label}
                 disabled={exportBusy || (i > 0 && !selected.size)}
@@ -690,11 +751,7 @@ export default function App() {
                 className={step === i ? "active" : step > i ? "complete" : ""}
                 onClick={() => chooseStep(i)}
               >
-                <span className="step-dot">
-                  {step > i ? <Check size={11} /> : i + 1}
-                </span>
                 {label}
-                {i < 2 && <ChevronRight size={12} />}
               </button>
             ))}
           </nav>
@@ -703,7 +760,7 @@ export default function App() {
           {session?.mode === "demo" ? (
             <span className="sample-badge">
               <span />
-              Sample workspace
+              Sample data
             </span>
           ) : session ? (
             <span className="session-status">
@@ -711,7 +768,18 @@ export default function App() {
               Connected · read only
             </span>
           ) : (
-            <span className="version">v0.1.0</span>
+            <span className="version">v0.2.0</span>
+          )}
+          {session?.mode === "user" && (
+            <button
+              className="icon-button theme-sync"
+              aria-label="Sync Discord theme"
+              title={`${appearanceLabel(session.appearance)} · Sync Discord theme`}
+              disabled={themeSyncing}
+              onClick={() => void syncTheme()}
+            >
+              <RefreshCw className={themeSyncing ? "spin" : ""} size={14} />
+            </button>
           )}
         </div>
       </header>
@@ -743,21 +811,7 @@ export default function App() {
                       className={`rail-button server-${i % 5} ${guildId === g.id ? "active" : ""}`}
                       onClick={() => void openGuild(g.id)}
                     >
-                      {g.icon ? (
-                        <img
-                          src={`https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=96`}
-                          alt=""
-                        />
-                      ) : (
-                        g.name
-                          .split(" ")
-                          .filter(
-                            (w) => !["the", "and"].includes(w.toLowerCase()),
-                          )
-                          .map((w) => w[0])
-                          .slice(0, 2)
-                          .join("")
-                      )}
+                      <ServerIcon guild={g} />
                     </button>
                   ))}
                   <div className="rail-spacer" />
@@ -944,7 +998,7 @@ export default function App() {
                       ) : (
                         <MessageCircle size={22} />
                       )}
-                      <strong>
+                      <strong role="heading" aria-level={1}>
                         {extraTab
                           ? "Server library"
                           : channel
@@ -1137,7 +1191,7 @@ export default function App() {
                     </div>
                   ) : extraTab ? (
                     <div className="extras-list">
-                      <h2>A little more of this server</h2>
+                      <h2>Server details</h2>
                       <p>
                         Choose individual roles, custom emoji, and scheduled
                         events.
@@ -1187,22 +1241,26 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="message-area" ref={messageArea}>
-                      <div className="channel-intro">
-                        <div className="channel-intro-icon">
-                          {channel ? (
-                            <IconForChannel c={channel} size={33} />
-                          ) : (
-                            <MessageCircle size={33} />
-                          )}
+                      {messages.length === 0 && !loadingMessages && (
+                        <div className="channel-intro">
+                          <div className="channel-intro-icon">
+                            {channel ? (
+                              <IconForChannel c={channel} size={33} />
+                            ) : (
+                              <MessageCircle size={33} />
+                            )}
+                          </div>
+                          <h1>
+                            {channel
+                              ? nameOf(channel)
+                              : "Choose a conversation"}
+                          </h1>
+                          <p>
+                            {channel?.topic ||
+                              "Select messages or use the channel checkbox to export its history."}
+                          </p>
                         </div>
-                        <h1>
-                          {channel ? nameOf(channel) : "Choose a conversation"}
-                        </h1>
-                        <p>
-                          {channel?.topic ||
-                            "A few things worth keeping. Select any item with its + button."}
-                        </p>
-                      </div>
+                      )}
                       <div className="date-divider">
                         <span>
                           {messages[0]
@@ -1618,19 +1676,14 @@ export default function App() {
                       )}
                       <div className="conversation-bottom">
                         <ShieldCheck size={14} />
-                        <span>
-                          You’re choosing what to keep. This view is read only.
-                        </span>
+                        <span>Read-only view · Select content to export</span>
                       </div>
                     </div>
                   )}
                 </main>
                 <aside className="collection">
                   <div className="collection-heading">
-                    <div className="collection-mark">
-                      <Archive size={18} />
-                    </div>
-                    <h2>Your collection</h2>
+                    <h2>Export selection</h2>
                     <span>{selected.size}</span>
                   </div>
                   {inspector ? (
@@ -1685,7 +1738,7 @@ export default function App() {
                             <Plus size={15} />
                           )}{" "}
                           {selected.has(inspector.selection.key)
-                            ? "In your collection"
+                            ? "Selected for export"
                             : `Select ${inspector.selection.kind}`}
                         </button>
                       )}
@@ -1703,11 +1756,6 @@ export default function App() {
                     </div>
                   ) : (
                     <>
-                      <p className="collection-description">
-                        A whole server or a single moment.
-                        <br />
-                        Save as much, or as little, as you like.
-                      </p>
                       {selected.size ? (
                         <div className="selection-list">
                           {[...selected.values()].map((s) => (
@@ -1743,24 +1791,15 @@ export default function App() {
                         </div>
                       ) : (
                         <div className="collection-empty">
-                          <div className="empty-stack">
-                            <MessageSquare size={32} />
-                            <span className="empty-plus">
-                              <Plus size={13} />
-                            </span>
-                          </div>
-                          <h3>Keep the good parts</h3>
+                          <h3>No items selected</h3>
                           <p>
-                            Use the <span className="inline-plus">+</span>{" "}
-                            beside any item to start your collection.
+                            Use the checkboxes beside servers, channels, and
+                            messages to build your export.
                           </p>
-                          <div className="selection-tip">
-                            <span>Try it</span>
-                            <p>
-                              Select a channel, pick a few messages, or open a
-                              profile.
-                            </p>
-                          </div>
+                          <p>
+                            Open a profile or the details menu to select more
+                            content.
+                          </p>
                         </div>
                       )}
                       {selected.size > 0 && (
@@ -1768,7 +1807,7 @@ export default function App() {
                           className="clear-selection"
                           onClick={() => setSelected(new Map())}
                         >
-                          Clear collection
+                          Clear selection
                         </button>
                       )}
                     </>
@@ -1780,19 +1819,14 @@ export default function App() {
                           ? `${selected.size} ${selected.size === 1 ? "item" : "items"} selected`
                           : "Nothing selected yet"}
                       </span>
-                      <span>Saved only when you’re ready</span>
                     </div>
                     <button
                       className="primary wide"
                       disabled={!selected.size}
                       onClick={() => setStep(1)}
                     >
-                      Choose export options <ArrowRight size={17} />
+                      Continue <ArrowRight size={17} />
                     </button>
-                    <span className="footer-note">
-                      <LockKeyhole size={11} /> Your selection stays on this
-                      device
-                    </span>
                   </div>
                 </aside>
               </div>
@@ -1887,10 +1921,10 @@ function Configure({
     <main className="configure">
       <div className="flow-heading">
         <button className="back-button" onClick={back}>
-          <ArrowLeft size={16} /> Back to your collection
+          <ArrowLeft size={16} /> Back to browsing
         </button>
-        <h1>A format for future you.</h1>
-        <p>Choose how your collection lives outside Discord.</p>
+        <h1>Export settings</h1>
+        <p>Choose a format and the content to include.</p>
       </div>
       <div className="configure-grid">
         <section className="format-section">
@@ -1945,7 +1979,7 @@ function Configure({
             also keep a machine-readable copy.
           </p>
           <h2 className="section-gap">
-            Narrow it down <span className="optional">optional</span>
+            Filters <span className="optional">optional</span>
           </h2>
           <div className="date-fields">
             <label>
@@ -2015,7 +2049,7 @@ function Configure({
           </label>
         </section>
         <aside className="options-section">
-          <h2>Bring along</h2>
+          <h2>Content</h2>
           {[
             {
               key: "threads",
@@ -2072,7 +2106,7 @@ function Configure({
           </div>
           <div className="collection-summary">
             <h3>
-              Your collection <span>{selected.length} items</span>
+              Selected items <span>{selected.length} items</span>
             </h3>
             {selected.slice(0, 5).map((s) => (
               <div key={s.key}>
@@ -2091,7 +2125,7 @@ function Configure({
           <span>· {selected.length} selected items</span>
         </span>
         <button className="primary" disabled={invalidDates} onClick={next}>
-          Choose where to save <ArrowRight size={17} />
+          Continue to save <ArrowRight size={17} />
         </button>
       </footer>
     </main>
@@ -2188,7 +2222,7 @@ function FolderPicker({
         <header>
           <div>
             <FolderOpen size={21} />
-            <h2 id="picker-title">A place for your collection</h2>
+            <h2 id="picker-title">Choose export folder</h2>
           </div>
           <button
             className="icon-button"
@@ -2450,7 +2484,7 @@ function SaveView({
         phase: "collecting",
         current: 0,
         total: 0,
-        detail: "Preparing your collection",
+        detail: "Preparing export",
         messages: 0,
         bytes: 0,
       });
@@ -2485,51 +2519,37 @@ function SaveView({
   return (
     <main className="save-view">
       <button className="back-button" disabled={saving} onClick={back}>
-        <ArrowLeft size={16} /> Back to export options
+        <ArrowLeft size={16} /> Back to settings
       </button>
       <div className="save-content">
-        <div
-          className={`save-illustration ${saving ? "is-saving" : ""} ${result ? "is-done" : ""}`}
-          aria-hidden="true"
-        >
-          <div className="save-orbit orbit-one" />
-          <div className="save-orbit orbit-two" />
-          <div className="download-stream">
-            <span />
-            <span />
-            <span />
-            <span />
+        {saving && (
+          <div className="transfer-visual" aria-hidden="true">
+            <FileArchive size={30} />
+            <div className="transfer-track">
+              <span />
+              <span />
+              <span />
+            </div>
+            <FolderOpen size={34} />
           </div>
-          <div className="save-icon">
-            {result ? (
-              <CheckCheck size={48} />
-            ) : saving ? (
-              <Archive size={45} />
-            ) : (
-              <ArrowDownToLine size={45} />
-            )}
-          </div>
-          <span className="spark spark-one" />
-          <span className="spark spark-two" />
-          <span className="spark spark-three" />
-        </div>
+        )}
         <h1>
           {result
-            ? "A little piece of Discord. Kept."
+            ? "Export complete"
             : saving
-              ? "Making it yours."
-              : "Ready when you are."}
+              ? "Saving export…"
+              : "Save export"}
         </h1>
         <p className="save-description">
           {result
             ? `${result.messages.toLocaleString()} ${result.messages === 1 ? "message" : "messages"} · ${prettyBytes(result.bytes)} · saved on your device`
             : saving
-              ? "Keep DisDown open while your collection is saved."
-              : `${selected.length} selected ${selected.length === 1 ? "item" : "items"}, one place to come back to.`}
+              ? "Keep DisDown open until saving finishes."
+              : `${selected.length} selected ${selected.length === 1 ? "item" : "items"} · ${options.format.toUpperCase()}${options.packaging === "zip" ? " in ZIP" : ""}`}
         </p>
         {session.mode === "demo" && (
           <span className="sample-export-note">
-            <Sparkles size={13} /> This export contains sample data
+            <Info size={14} /> Sample data export
           </span>
         )}
         {result ? (
@@ -2565,7 +2585,7 @@ function SaveView({
               </details>
             )}
             <button className="text-link start-again" onClick={reset}>
-              Start a new collection <ArrowRight size={14} />
+              New export <ArrowRight size={14} />
             </button>
           </div>
         ) : (
@@ -2590,7 +2610,7 @@ function SaveView({
                 }}
               >
                 <Folder size={17} />
-                <span>{directory || "Choose a place to save"}</span>
+                <span>{directory || "Choose a folder"}</span>
                 <span>
                   {directory ? "Change" : "Browse"}
                   <ChevronRight size={13} />
@@ -2640,12 +2660,11 @@ function SaveView({
               </div>
             ) : (
               <button className="glow-save" onClick={() => void save()}>
-                <Download size={21} /> Save collection <ArrowDown size={19} />
+                <Download size={20} /> Save export
               </button>
             )}
             <p className="save-fineprint">
-              <ShieldCheck size={13} /> Saved directly to your device. Nothing
-              is uploaded.
+              <ShieldCheck size={13} /> Saved locally on your computer.
             </p>
           </>
         )}

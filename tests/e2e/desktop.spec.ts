@@ -1,3 +1,4 @@
+import { themeVariables } from "../../src/renderer/theme";
 import {
   test,
   expect,
@@ -28,13 +29,14 @@ test.beforeEach(async () => {
   });
   page = await app.firstWindow();
   await page.waitForLoadState("domcontentloaded");
+  await page.emulateMedia({ reducedMotion: "reduce" });
 });
 test.afterEach(async () => {
   await app.close();
   await rm(folder, { recursive: true, force: true });
 });
 async function sample() {
-  await page.getByRole("button", { name: "Explore with sample data" }).click();
+  await page.getByRole("button", { name: "Preview with sample data" }).click();
   await expect(
     page.getByRole("heading", { name: "general", exact: true }),
   ).toBeVisible();
@@ -144,20 +146,20 @@ test("granular selection across conversations, threads, profiles and server meta
       exact: true,
     })
     .click();
-  await page.getByRole("button", { name: "Choose export options" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
   await expect(
-    page.getByRole("heading", { name: "A format for future you." }),
+    page.getByRole("heading", { name: "Export settings" }),
   ).toBeVisible();
   for (const label of ["JSON", "CSV", "Markdown", "Plain text", "HTML"])
     await page.getByRole("radio", { name: new RegExp(`^${label}`) }).click();
   await page.getByLabel("From date").fill("2026-10-29");
   await page.getByLabel("Through date").fill("2026-10-28");
   await expect(
-    page.getByRole("button", { name: "Choose where to save" }),
+    page.getByRole("button", { name: "Continue to save" }),
   ).toBeDisabled();
   await page.getByLabel("From date").fill("2026-10-01");
   await expect(
-    page.getByRole("button", { name: "Choose where to save" }),
+    page.getByRole("button", { name: "Continue to save" }),
   ).toBeEnabled();
   await page.screenshot({ path: "artifacts/options.png" });
 });
@@ -167,15 +169,13 @@ test("themed picker creates folder, writes real export and protects existing fil
     .getByRole("button", { name: "Select message:", exact: false })
     .first()
     .click();
-  await page.getByRole("button", { name: "Choose export options" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("radio", { name: /^JSON/ }).click();
   await page.getByLabel("ZIP bundle", { exact: true }).uncheck();
-  await page.getByRole("button", { name: "Choose where to save" }).click();
+  await page.getByRole("button", { name: "Continue to save" }).click();
   await page.screenshot({ path: "artifacts/save.png" });
   await page.getByLabel("Archive filename").fill("my-conversation");
-  await page
-    .getByRole("button", { name: "Save collection", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Save export", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Shift+Tab");
   expect(
@@ -199,7 +199,7 @@ test("themed picker creates folder, writes real export and protects existing fil
   await page.screenshot({ path: "artifacts/picker.png" });
   await page.getByRole("button", { name: "Use this folder" }).click();
   await expect(
-    page.getByRole("heading", { name: "A little piece of Discord. Kept." }),
+    page.getByRole("heading", { name: "Export complete" }),
   ).toBeVisible();
   const saved = JSON.parse(
     await readFile(
@@ -212,12 +212,10 @@ test("themed picker creates folder, writes real export and protects existing fil
   expect(saved.warnings.join(" ")).toContain("Sample data");
   await page.waitForTimeout(750);
   await page.screenshot({ path: "artifacts/saved.png" });
-  await page.getByRole("button", { name: "Back to export options" }).click();
-  await page.getByRole("button", { name: "Choose where to save" }).click();
+  await page.getByRole("button", { name: "Back to settings" }).click();
+  await page.getByRole("button", { name: "Continue to save" }).click();
   await page.getByLabel("Archive filename").fill("my-conversation");
-  await page
-    .getByRole("button", { name: "Save collection", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Save export", exact: true }).click();
   await page.getByLabel("Folder path").fill(path.join(folder, "My archive"));
   // Confirming a typed path must validate that path, even before pressing Go.
   await page.getByRole("button", { name: "Use this folder" }).click();
@@ -240,9 +238,7 @@ test("minimum desktop size keeps navigation and selections accessible", async ()
     .getByRole("button", { name: "Select message:", exact: false })
     .first()
     .click();
-  await expect(
-    page.getByRole("button", { name: "Choose export options" }),
-  ).toBeInViewport();
+  await expect(page.getByRole("button", { name: "Continue" })).toBeInViewport();
   await expect(
     page.getByRole("button", { name: "Direct messages", exact: true }),
   ).toBeInViewport();
@@ -287,4 +283,139 @@ test("forum channels open directly to selectable posts and return from the threa
     }),
   ).toBeVisible();
   await page.screenshot({ path: "artifacts/forum.png" });
+});
+
+test("light account theme stays applied through export and the themed folder picker", async () => {
+  await sample();
+  const tokens = themeVariables({ source: "discord", base: "light" });
+  await page.evaluate((tokens) => {
+    for (const [name, value] of Object.entries(tokens))
+      document.documentElement.style.setProperty(name, value);
+    document.documentElement.dataset.baseTheme = "light";
+    document.documentElement.style.colorScheme = "light";
+  }, tokens);
+  expect(
+    await page.evaluate(
+      () =>
+        getComputedStyle(document.querySelector(".conversation")!)
+          .backgroundColor,
+    ),
+  ).toBe("rgb(251, 251, 251)");
+  await expect(page.locator(".author-name").first()).toHaveCSS(
+    "color",
+    "rgb(46, 46, 52)",
+  );
+  await expect(page.locator(".server-heading > button").first()).toHaveCSS(
+    "color",
+    "rgb(46, 46, 52)",
+  );
+  await page.screenshot({ path: "artifacts/light-browser.png" });
+  await page
+    .getByRole("button", { name: "Select message:", exact: false })
+    .first()
+    .click();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Continue to save", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Save export", exact: true }).click();
+  await page.getByLabel("Folder path").fill(folder);
+  await page.getByLabel("Go to folder", { exact: true }).click();
+  await expect(page.locator(".folder-picker .loading-state")).toBeHidden();
+  expect(
+    await page.evaluate(
+      () =>
+        getComputedStyle(document.querySelector(".folder-picker")!)
+          .backgroundColor,
+    ),
+  ).toBe("rgb(251, 251, 251)");
+  await page.screenshot({ path: "artifacts/light-picker.png" });
+  await page.getByRole("button", { name: "Cancel", exact: true }).click();
+});
+
+test("account appearance and rounded server icons load with full image coverage and failure fallback", async () => {
+  // Fake only the main-process HTTP boundary. This exercises consent, IPC,
+  // settings decoding and renderer image handling without a real credential.
+  await app.evaluate(() => {
+    globalThis.fetch = (async (input: string | URL | Request) => {
+      const route = new URL(String(input)).pathname.replace("/api/v10", "");
+      const guilds = [
+        { id: "20001", name: "Animated server", icon: "a_test", owner: true },
+        { id: "20002", name: "Failed image", icon: "missing", owner: true },
+        { id: "20003", name: "No image", owner: true },
+      ];
+      const payload =
+        route === "/users/@me"
+          ? { id: "10001", username: "sample" }
+          : route === "/users/@me/guilds"
+            ? guilds
+            : route === "/users/@me/settings-proto/1"
+              ? { settings: "agIIAg==" }
+              : route === "/guilds/20001"
+                ? guilds[0]
+                : route.includes("/members/")
+                  ? { roles: [] }
+                  : [];
+      return new Response(JSON.stringify(payload), { status: 200 });
+    }) as typeof fetch;
+  });
+  const logo = await readFile(path.resolve("public/logo.png"));
+  await page.route("https://cdn.discordapp.com/icons/**", async (route) => {
+    if (route.request().url().includes("/20001/"))
+      await route.fulfill({ body: logo, contentType: "image/png" });
+    else await route.abort();
+  });
+  await page
+    .getByLabel("Discord token", { exact: true })
+    .fill("local-test-credential");
+  await page.getByText("I own this account", { exact: false }).click();
+  await page
+    .getByText("I understand Discord’s policy", { exact: false })
+    .click();
+  await page
+    .getByRole("button", { name: "Connect to Discord", exact: true })
+    .click();
+  const server = page.getByRole("button", {
+    name: "Open server Animated server",
+    exact: true,
+  });
+  const icon = server.locator("img");
+  await expect(icon).toBeVisible();
+  await expect
+    .poll(() => icon.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  const geometry = await icon.evaluate((img) => ({
+    width: img.getBoundingClientRect().width,
+    height: img.getBoundingClientRect().height,
+    radius: getComputedStyle(img).borderRadius,
+  }));
+  expect(geometry).toEqual({ width: 44, height: 44, radius: "13px" });
+  await expect(
+    page.getByRole("button", { name: "Open server Failed image", exact: true }),
+  ).toHaveText("Fi");
+  await expect(
+    page.getByRole("button", { name: "Open server No image", exact: true }),
+  ).toHaveText("Ni");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-base-theme",
+    "light",
+  );
+  await expect(page.locator(".server-heading > button").first()).toHaveCSS(
+    "color",
+    "rgb(46, 46, 52)",
+  );
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await server.hover();
+  await expect(icon).toHaveAttribute("src", /\.gif\?size=128$/);
+  await page
+    .getByRole("button", { name: "Sync Discord theme", exact: true })
+    .hover();
+  await expect(icon).toHaveAttribute("src", /\.png\?size=128$/);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await server.hover();
+  await expect(icon).toHaveAttribute("src", /\.png\?size=128$/);
+  await page.screenshot({
+    path: "artifacts/server-icons.png",
+    animations: "disabled",
+  });
 });

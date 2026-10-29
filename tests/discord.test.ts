@@ -12,13 +12,15 @@ function transport(
 const json = (data: unknown, status = 200, headers?: Record<string, string>) =>
   new Response(JSON.stringify(data), { status, headers });
 const base = (p: string) =>
-  p === "/users/@me"
-    ? { id: "1", username: "Test" }
-    : p.startsWith("/users/@me/guilds")
-      ? []
-      : p === "/users/@me/channels"
+  p === "/users/@me/settings-proto/1"
+    ? { settings: "agIIAQ==" }
+    : p === "/users/@me"
+      ? { id: "1", username: "Test" }
+      : p.startsWith("/users/@me/guilds")
         ? []
-        : undefined;
+        : p === "/users/@me/channels"
+          ? []
+          : undefined;
 describe("permission evaluation", () => {
   const guild: Guild = {
     id: "10",
@@ -313,6 +315,29 @@ describe("Discord read-only API", () => {
     const page = await broken.threadPage({ id: "40", type: 15 });
     expect(page.cursor).toBeUndefined();
     expect(page.warnings[0]).toContain("empty thread page");
+  });
+  it("recovers account theme synchronization after an unavailable settings response", async () => {
+    let fail = true;
+    const c = new DiscordClient(
+      token,
+      "user",
+      transport((p) =>
+        p === "/users/@me/settings-proto/1"
+          ? fail
+            ? json({}, 403)
+            : json({ settings: "agIIAQ==" })
+          : json(base(p)),
+      ),
+    );
+    await c.connect();
+    expect(c.info.warnings.join(" ")).toContain(
+      "appearance settings could not be read",
+    );
+    fail = false;
+    expect((await c.appearance()).base).toBe("dark");
+    expect(c.info.warnings.join(" ")).not.toContain(
+      "appearance settings could not be read",
+    );
   });
   it("paginates reaction users and encodes emoji once", async () => {
     const paths: string[] = [];

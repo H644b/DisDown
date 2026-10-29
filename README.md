@@ -1,6 +1,6 @@
 <p align="center"><img src="public/logo.svg" width="88" alt="DisDown logo"></p>
 <h1 align="center">DisDown</h1>
-<p align="center">Good conversations. Yours to keep.</p>
+<p align="center">A local Discord archive client.</p>
 
 DisDown is a local, read-only desktop app for choosing accessible Discord content and saving it to your computer. Browse a familiar server rail, channel tree, and conversation view. Build a collection without leaving the conversation, choose an export format, then save through DisDown’s themed folder browser.
 
@@ -10,12 +10,12 @@ DisDown is a local, read-only desktop app for choosing accessible Discord conten
 
 Get the installer for your platform from [GitHub Releases](https://github.com/H644b/DisDown/releases). The release page records exactly which builds and live checks have passed.
 
-| Platform | Packages |
-| --- | --- |
-| macOS Apple Silicon | DMG, ZIP |
-| macOS Intel | DMG, ZIP |
-| Windows x64 | Setup EXE, portable EXE |
-| Linux x64 | AppImage, DEB |
+| Platform            | Packages                |
+| ------------------- | ----------------------- |
+| macOS Apple Silicon | DMG, ZIP                |
+| macOS Intel         | DMG, ZIP                |
+| Windows x64         | Setup EXE, portable EXE |
+| Linux x64           | AppImage, DEB           |
 
 Initial builds are not signed with a Developer ID, notarized by Apple, or signed with a Windows publisher certificate. Operating systems may show publisher warnings. This is distinct from the app’s test status. See [installation](docs/INSTALLING.md).
 
@@ -30,13 +30,19 @@ Only provide a token you own or are authorized to use. **Never put a token in an
 ## Choose → Configure → Save
 
 1. Open DisDown and connect after consenting, or explore the clearly labeled sample workspace.
-2. Use `+` beside servers, categories, channels, DMs, group chats, threads, messages, reactions, authors, attachments, embeds, stickers, polls, message components, roles, emoji, and events. Open a profile or object inspector to select individual returned fields.
+2. Use the checkboxes beside servers, categories, channels, DMs, group chats, threads, messages, reactions, authors, attachments, embeds, stickers, polls, message components, roles, emoji, and events. Open a profile or object inspector to select individual returned fields.
    Forum and media channels open directly to a paged post list. Open a post to read its messages, use **Back to forum** to return, or select the entire post. **Load more posts** continues through active and archived results.
-3. Click **Choose export options** in the persistent collection tray. Choose HTML, JSON, CSV, Markdown, or plain text. Apply UTC date filters, a message phrase, author IDs, or a matching-message limit per channel.
+3. Click **Continue** in the persistent **Export selection** pane. Choose HTML, JSON, CSV, Markdown, or plain text. Apply UTC date filters, a message phrase, author IDs, or a matching-message limit per channel.
 4. Choose optional threads, reaction counts, author profiles, and attachment downloads. Downloaded attachments require a ZIP bundle.
-5. Click **Save collection**, browse folders in the app, create a folder if needed, then choose the destination. Existing files are replaced only after explicit confirmation. Progress reports real collection, media, and writing phases. Cancelled or failed exports remove their temporary files.
+5. Click **Continue to save**, then **Save export**. Browse folders in the app, create a folder if needed, and choose the destination. Existing files are replaced only after explicit confirmation. Progress reports real collection, media, and writing phases. Cancelled or failed exports remove their temporary files.
 
 A broad selection expands during export. A leaf selection keeps its scope: selecting a reaction does not silently include its message or channel. Overlapping selections are deduplicated. A ZIP contains the selected format, a JSON data copy (when needed), a manifest, and downloaded media. Standalone files preserve metadata in the chosen format.
+
+## Your Discord theme
+
+User-token sessions read the account’s appearance settings and apply its light, dark, darker, midnight, or system theme, including the current 24 Nitro presets and custom gradients. The same theme covers browsing, export settings, and the in-app folder picker. Use **Sync Discord theme** beside the connection status after changing your Discord appearance; DisDown also refreshes when its window regains focus, at most once per minute.
+
+Bot sessions and sample previews use the standard dark theme. If appearance settings are unavailable, the connection stays usable and an access notice explains how to retry. This uses an undocumented, read-only settings endpoint; Discord can change its format. DisDown does not change your Discord settings or persist the settings response. Server images fill their rounded icons, with initials for missing or unavailable images.
 
 ## Access and completeness
 

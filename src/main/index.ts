@@ -107,6 +107,7 @@ app.whenReady().then(async () => {
       }
     },
   );
+  handle("appearance", () => active().appearance());
   handle("session", () => (client ? clean(client.info) : null));
   handle("demo", () => {
     if (controller) throw new Error("Cancel the export first.");

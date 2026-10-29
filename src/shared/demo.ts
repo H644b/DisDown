@@ -250,6 +250,9 @@ export class DemoClient implements DataClient {
     warnings: [],
   };
   disconnect() {}
+  async appearance() {
+    return { source: "default" as const, base: "dark" as const };
+  }
   async guild(guildId: string): Promise<GuildView> {
     const guild = guilds.find((g) => g.id === guildId)!;
     const base = channels

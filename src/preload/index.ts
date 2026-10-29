@@ -4,6 +4,7 @@ const invoke = (method: string, ...args: unknown[]) =>
   ipcRenderer.invoke(`disdown:${method}`, ...args);
 const bridge: DisdownBridge = {
   platform: process.platform,
+  appearance: () => invoke("appearance"),
   session: () => invoke("session"),
   connect: (input) => invoke("connect", input),
   demo: () => invoke("demo"),

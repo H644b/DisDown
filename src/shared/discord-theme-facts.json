@@ -1,0 +1,428 @@
+{
+  "source": {
+    "assets": [
+      "https://discord.com/assets/web.ab385e8d0b568060.js",
+      "https://discord.com/assets/952007.87dea5a700fabeaf.css",
+      "https://discord.com/assets/419070.cd025d491c05554a.css"
+    ],
+    "checked": "2026-10-28"
+  },
+  "presets": {
+    "0": {
+      "name": "Mint Apple",
+      "base": "light",
+      "colors": [
+        "#56b69f",
+        "#63bc61",
+        "#9eca67"
+      ],
+      "stops": [
+        0.061500000000000006,
+        0.48700000000000004,
+        0.9307
+      ],
+      "angle": 180
+    },
+    "1": {
+      "name": "Citrus Sherbert",
+      "base": "light",
+      "colors": [
+        "#f3b336",
+        "#ee8558"
+      ],
+      "stops": [
+        0.311,
+        0.6709
+      ],
+      "angle": 180
+    },
+    "2": {
+      "name": "Retro Raincloud",
+      "base": "light",
+      "colors": [
+        "#3a7ca1",
+        "#7f7eb9",
+        "#7f7eb9",
+        "#3a7ca1"
+      ],
+      "stops": [
+        0.0564,
+        0.2638,
+        0.49920000000000003,
+        0.7312000000000001
+      ],
+      "angle": 148.71
+    },
+    "3": {
+      "name": "Hanami",
+      "base": "light",
+      "colors": [
+        "#efaab3",
+        "#efd696",
+        "#a6daa2"
+      ],
+      "stops": [
+        0.0356,
+        0.3549,
+        0.6878
+      ],
+      "angle": 38.08
+    },
+    "4": {
+      "name": "Sunrise",
+      "base": "light",
+      "colors": [
+        "#9f4175",
+        "#c49064",
+        "#a6953d"
+      ],
+      "stops": [
+        0.0862,
+        0.4807,
+        0.7604000000000001
+      ],
+      "angle": 154.19
+    },
+    "5": {
+      "name": "Cotton Candy",
+      "base": "light",
+      "colors": [
+        "#f4abb8",
+        "#b1c2fc"
+      ],
+      "stops": [
+        0.085,
+        0.9428
+      ],
+      "angle": 180.14
+    },
+    "6": {
+      "name": "Lofi Vibes",
+      "base": "light",
+      "colors": [
+        "#a4c0f7",
+        "#a9e4e8",
+        "#b0e2b8",
+        "#cfdfa2"
+      ],
+      "stops": [
+        0.0708,
+        0.3494,
+        0.6512,
+        0.9623
+      ],
+      "angle": 179.52
+    },
+    "7": {
+      "name": "Desert Khaki",
+      "base": "light",
+      "colors": [
+        "#e7dbd0",
+        "#dfd0b2",
+        "#e0d6a3"
+      ],
+      "stops": [
+        0.1292,
+        0.3292,
+        0.5211
+      ],
+      "angle": 38.99
+    },
+    "8": {
+      "name": "Sunset",
+      "base": "darker",
+      "colors": [
+        "#48288c",
+        "#db7f4b"
+      ],
+      "stops": [
+        0.2757,
+        0.7125
+      ],
+      "angle": 141.68
+    },
+    "9": {
+      "name": "Chroma Glow",
+      "base": "darker",
+      "colors": [
+        "#0eb5bf",
+        "#4c0ce0",
+        "#a308a7",
+        "#9a53ff",
+        "#218be0"
+      ],
+      "stops": [
+        0.0394,
+        0.261,
+        0.3982,
+        0.5689,
+        0.7645000000000001
+      ],
+      "angle": 128.92
+    },
+    "10": {
+      "name": "Forest",
+      "base": "darker",
+      "colors": [
+        "#142215",
+        "#2d4d39",
+        "#454c32",
+        "#5a7c58",
+        "#a98e4b"
+      ],
+      "stops": [
+        0.11199999999999999,
+        0.2993,
+        0.4864,
+        0.6785,
+        0.8354
+      ],
+      "angle": 162.27
+    },
+    "11": {
+      "name": "Crimson Moon",
+      "base": "darker",
+      "colors": [
+        "#950909",
+        "#000000"
+      ],
+      "stops": [
+        0.1617,
+        0.72
+      ],
+      "angle": 64.92
+    },
+    "12": {
+      "name": "Midnight Blurple",
+      "base": "darker",
+      "colors": [
+        "#5348ca",
+        "#140730"
+      ],
+      "stops": [
+        0.1121,
+        0.6192
+      ],
+      "angle": 48.17
+    },
+    "13": {
+      "name": "Mars",
+      "base": "darker",
+      "colors": [
+        "#895240",
+        "#8f4343"
+      ],
+      "stops": [
+        0.1461,
+        0.7462000000000001
+      ],
+      "angle": 170.82
+    },
+    "14": {
+      "name": "Dusk",
+      "base": "darker",
+      "colors": [
+        "#665069",
+        "#91a3d1"
+      ],
+      "stops": [
+        0.1284,
+        0.8599
+      ],
+      "angle": 180
+    },
+    "15": {
+      "name": "Under The Sea",
+      "base": "darker",
+      "colors": [
+        "#647962",
+        "#588575",
+        "#6a8482"
+      ],
+      "stops": [
+        0.0191,
+        0.4899,
+        0.9634999999999999
+      ],
+      "angle": 179.14
+    },
+    "16": {
+      "name": "Easter Egg",
+      "base": "light",
+      "colors": [
+        "#7289da",
+        "#4e5d94"
+      ],
+      "stops": [
+        0.04,
+        0.96
+      ],
+      "angle": 180
+    },
+    "17": {
+      "name": "Retro Storm",
+      "base": "darker",
+      "colors": [
+        "#3a7ca1",
+        "#58579a",
+        "#58579a",
+        "#3a7ca1"
+      ],
+      "stops": [
+        0.0564,
+        0.2638,
+        0.49920000000000003,
+        0.7312000000000001
+      ],
+      "angle": 148.71
+    },
+    "18": {
+      "name": "Neon Nights",
+      "base": "darker",
+      "colors": [
+        "#01a89e",
+        "#7d60ba",
+        "#b43898"
+      ],
+      "stops": [
+        0,
+        0.5,
+        1
+      ],
+      "angle": 180
+    },
+    "19": {
+      "name": "Sepia",
+      "base": "darker",
+      "colors": [
+        "#857664",
+        "#5b4421"
+      ],
+      "stops": [
+        0.1414,
+        0.6035
+      ],
+      "angle": 69.98
+    },
+    "20": {
+      "name": "Strawberry Lemonade",
+      "base": "darker",
+      "colors": [
+        "#af1a6c",
+        "#c26b20",
+        "#e7a525"
+      ],
+      "stops": [
+        0.18789999999999998,
+        0.4976,
+        0.8072
+      ],
+      "angle": 161.03
+    },
+    "21": {
+      "name": "Aurora",
+      "base": "darker",
+      "colors": [
+        "#062053",
+        "#191fbb",
+        "#13929a",
+        "#218573",
+        "#051a81"
+      ],
+      "stops": [
+        0.1039,
+        0.2687,
+        0.48310000000000003,
+        0.6498,
+        0.925
+      ],
+      "angle": 239.16
+    },
+    "22": {
+      "name": "Blurple Twilight",
+      "base": "darker",
+      "colors": [
+        "#2c3fe7",
+        "#261d83"
+      ],
+      "stops": [
+        0.1118,
+        0.6454000000000001
+      ],
+      "angle": 47.61
+    },
+    "23": {
+      "name": "Hexagon",
+      "base": "darker",
+      "colors": [
+        "#4645ff",
+        "#af01f3",
+        "#ff6698",
+        "#f89a03"
+      ],
+      "stops": [
+        0,
+        0.3333,
+        0.6667000000000001,
+        1
+      ],
+      "angle": 135
+    }
+  },
+  "bases": {
+    "dark": {
+      "main": "#36373e",
+      "sidebar": "#323339",
+      "rail": "#2c2d32",
+      "surface": "#393a41",
+      "raised": "#3c3d45",
+      "text": "#f3f3f4",
+      "muted": "#abacb2",
+      "heading": "#ffffff"
+    },
+    "light": {
+      "main": "#fbfbfb",
+      "sidebar": "#fbfbfb",
+      "rail": "#f3f3f4",
+      "surface": "#ffffff",
+      "raised": "#ffffff",
+      "text": "#2e2e34",
+      "muted": "#6c6d76",
+      "heading": "#28282d"
+    },
+    "darker": {
+      "main": "#202024",
+      "sidebar": "#1a1a1e",
+      "rail": "#121214",
+      "surface": "#242429",
+      "raised": "#28282d",
+      "text": "#efeff1",
+      "muted": "#96979e",
+      "heading": "#fbfbfb"
+    },
+    "midnight": {
+      "main": "#000000",
+      "sidebar": "#000000",
+      "rail": "#000000",
+      "surface": "#0a0a0c",
+      "raised": "#121214",
+      "text": "#d4d5d8",
+      "muted": "#81828a",
+      "heading": "#dcdcdf"
+    }
+  },
+  "overlays": {
+    "dark": {
+      "chat": 0.8,
+      "sidebar": 0.85,
+      "rail": 0.9,
+      "frame": 0.7
+    },
+    "light": {
+      "chat": 0.85,
+      "sidebar": 0.8,
+      "rail": 0.85,
+      "frame": 0.65
+    }
+  }
+}

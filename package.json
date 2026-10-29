@@ -1,6 +1,6 @@
 {
   "name": "disdown",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Choose the Discord content you want to keep. A local, read-only desktop archive client.",
   "main": "dist-electron/main/index.cjs",
   "author": "H644b",
@@ -23,6 +23,7 @@
     "verify:live": "node scripts/verify-live.mjs"
   },
   "dependencies": {
+    "@fontsource/noto-sans": "^5.3.0",
     "archiver": "^7.0.1",
     "lucide-react": "^1.63.0",
     "react": "^19.3.1",

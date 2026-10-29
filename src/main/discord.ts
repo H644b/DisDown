@@ -1,5 +1,6 @@
 import type {
   Channel,
+  DiscordAppearance,
   Guild,
   GuildView,
   Message,
@@ -8,7 +9,10 @@ import type {
   ThreadPage,
   User,
 } from "../shared/types";
+import { decodeAppearance } from "./appearance";
 import { nameOf } from "../shared/utils";
+const APPEARANCE_WARNING =
+  "Discord appearance settings could not be read. The default theme is in use; use Sync Discord theme to retry.";
 export class DiscordError extends Error {
   constructor(
     message: string,
@@ -20,6 +24,7 @@ export class DiscordError extends Error {
 }
 export interface DataClient {
   info: SessionInfo;
+  appearance(): Promise<DiscordAppearance>;
   guild(id: string, signal?: AbortSignal): Promise<GuildView>;
   messages(
     id: string,
@@ -129,7 +134,7 @@ export class DiscordClient implements DataClient {
             headers: {
               Authorization:
                 this.mode === "bot" ? `Bot ${this.token}` : this.token,
-              "User-Agent": "DisDown (https://github.com/H644b/DisDown, 0.1.0)",
+              "User-Agent": "DisDown (https://github.com/H644b/DisDown, 0.2.0)",
             },
             signal: signal
               ? AbortSignal.any([signal, AbortSignal.timeout(30000)])
@@ -230,7 +235,27 @@ export class DiscordClient implements DataClient {
         "Bot sessions only show servers and content available to the bot. Personal DMs and group chats are not available. Enable Message Content intent for full message bodies.",
       );
     this.info = { user, mode: this.mode, guilds, dms, warnings };
+    if (this.mode === "user")
+      try {
+        this.info.appearance = await this.appearance();
+      } catch {
+        warnings.push(APPEARANCE_WARNING);
+      }
     return this.info;
+  }
+  async appearance(): Promise<DiscordAppearance> {
+    if (this.mode === "bot") return { source: "default", base: "dark" };
+    const response = await this.get<{ settings: string }>(
+      "/users/@me/settings-proto/1",
+    );
+    const appearance = decodeAppearance(response.settings);
+    if (this.info) {
+      this.info.appearance = appearance;
+      this.info.warnings = this.info.warnings.filter(
+        (warning) => warning !== APPEARANCE_WARNING,
+      );
+    }
+    return appearance;
   }
   async guild(guildId: string, signal?: AbortSignal): Promise<GuildView> {
     id(guildId);

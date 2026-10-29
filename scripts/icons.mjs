@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 const svg = await readFile("public/logo.svg");
 const origin =
-  "Origin: original DisDown geometric vector monogram in public/logo.svg, rasterized by scripts/icons.mjs using Sharp. Lavender rounded square, dark D and inset download arrow. No generated or stock artwork.";
+  "Origin: original DisDown geometric vector monogram in public/logo.svg, rasterized by scripts/icons.mjs using Sharp. Discord blurple rounded square, white D and inset download arrow. No generated or stock artwork.";
 const png = async (size) =>
   pngOrigin(await sharp(svg).resize(size, size).png().toBuffer(), origin);
 await mkdir("build/icons", { recursive: true });

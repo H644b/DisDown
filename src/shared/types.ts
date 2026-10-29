@@ -140,7 +140,20 @@ export const defaultOptions: ExportOptions = {
   maxMessages: 0,
   redact: false,
 };
+export interface DiscordAppearance {
+  source: "discord" | "default";
+  base: "system" | "light" | "dark" | "darker" | "midnight";
+  darkSidebar?: boolean;
+  presetId?: number;
+  custom?: {
+    colors: string[];
+    stops?: number[];
+    angle: number;
+    intensity: number;
+  };
+}
 export interface SessionInfo {
+  appearance?: DiscordAppearance;
   user: User;
   mode: "user" | "bot" | "demo";
   guilds: Guild[];
@@ -218,6 +231,7 @@ export interface DisdownBridge {
     policyAccepted: boolean;
   }): Promise<SessionInfo>;
   session(): Promise<SessionInfo | null>;
+  appearance(): Promise<DiscordAppearance>;
   demo(): Promise<SessionInfo>;
   disconnect(): Promise<void>;
   guild(id: string): Promise<GuildView>;

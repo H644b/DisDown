@@ -13,6 +13,7 @@ const desktopOnly = async (): Promise<any> => {
 };
 export const bridge: DisdownBridge = window.disdown || {
   platform: "browser",
+  appearance: () => sample.appearance(),
   session: async () => sample.info,
   demo: async () => sample.info,
   connect: desktopOnly,

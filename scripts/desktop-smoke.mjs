@@ -24,8 +24,8 @@ try {
   await page.waitForLoadState("domcontentloaded");
   if (!(await page.title().then((t) => t.includes("DisDown"))))
     throw new Error("Wrong application title");
-  await page.getByRole("button", { name: "Explore with sample data" }).click();
-  await page.getByRole("button", { name: "Choose export options" }).waitFor();
+  await page.getByRole("button", { name: "Preview with sample data" }).click();
+  await page.getByRole("button", { name: "Continue" }).waitFor();
   console.log(
     "Desktop application launched; preload and sample API are working.",
   );
