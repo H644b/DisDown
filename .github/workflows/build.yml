@@ -1,0 +1,76 @@
+name: Test and build desktop apps
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  desktop:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: macOS Apple Silicon, os: macos-15, arch: arm64 }
+          - { name: macOS Intel, os: macos-15-intel, arch: x64 }
+          - { name: Windows x64, os: windows-latest, arch: x64 }
+          - { name: Linux x64, os: ubuntu-24.04, arch: x64 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and typecheck
+        run: npm run build
+      - name: API and export tests
+        run: npm test
+      - name: Desktop interaction tests
+        if: runner.os != 'Linux'
+        run: npm run test:e2e
+      - name: Desktop interaction tests (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum npm run test:e2e
+      - name: Package installers
+        run: npm run dist -- --${{ matrix.arch }}
+      - name: Find packaged application
+        shell: bash
+        run: |
+          node scripts/find-packaged.mjs >> "$GITHUB_ENV"
+      - name: Launch packaged application
+        if: runner.os != 'Linux'
+        run: npm run test:desktop
+      - name: Launch packaged application (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum npm run test:desktop
+      - name: Upload installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: DisDown-${{ runner.os }}-${{ matrix.arch }}
+          path: |
+            release/*.dmg
+            release/*.zip
+            release/*.exe
+            release/*.AppImage
+            release/*.deb
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-evidence-${{ runner.os }}-${{ matrix.arch }}
+          path: |
+            artifacts/*.png
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14

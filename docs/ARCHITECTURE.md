@@ -1,0 +1,15 @@
+# Architecture and trust boundaries
+
+DisDown uses Electron with a local React/TypeScript interface. The renderer has no Node integration, context isolation is enabled, and the preload exposes individual methods rather than a generic IPC or filesystem API. Main-frame sender identity is checked for every IPC request. Navigation, popups, webviews, and permission requests are denied. The UI uses a restrictive content security policy and does not render remote HTML.
+
+`src/main/discord.ts` owns the transient token and sends GET requests to the fixed Discord API v10 origin. Requests are serialized to honor server-provided rate-limit headers. HTTP 429, temporary server failures and bounded connection failures are retried. Requests have timeouts and export cancellation signals. Error messages do not echo server payloads or tokens. Disconnect and HTTP 401 clear the token reference. No attempt is made to extract credentials from Discord or another application.
+
+`src/main/exporter.ts` resolves the explicit selection. Servers and categories expand to permitted channels; channels paginate history and optionally discover accessible active/archived threads. Leaf selections retain their visible snapshot and context IDs. Individual profile/reaction selections can fetch available supplementary data. A selected message is not an instruction to archive its channel. Access failures become warnings; cancellation remains a failure and removes partial output. A 250,000-message safety ceiling prevents unbounded in-memory accumulation.
+
+`src/main/filesystem.ts` implements the themed folder browser: absolute paths, directory listing, parent navigation, shortcuts and new directories. Unsafe and nonportable filenames are rejected. Directory paths are canonicalized. File bytes are staged with restrictive permissions; the completed file is fsynced and committed. Without replacement consent, an atomic hard link refuses an existing destination. With consent, a final rename replaces the named file. Sibling partial files and temporary media are removed on failure/cancel.
+
+Attachment downloads allow only HTTPS on cdn.discordapp.com and media.discordapp.net, reject redirects, omit authorization and cap each file at 512 MB. Failed downloads remain explicit warnings. HTML output is escaped and script-free. CSV content is quoted and formula-prefixed cells are neutralized. A ZIP manifest records settings, selection, counts, truncation, and warnings. Secrets in common credential/account keys are stripped from serialized structured data; message content is not censored or scanned.
+
+Sample mode is deterministic and contains fabricated conversations clearly marked in both the UI and exports. Tests inject transport responses or use that sample client. Live verification is separately recorded locally under ignored `artifacts/private/`; those reports must never be committed with private content.
+
+No token is intentionally persisted. Like any desktop program, process memory can be exposed by OS-level debugging, swap, or crash tooling outside DisDown’s control. Do not treat transient in-memory storage as a guarantee against a compromised operating system.

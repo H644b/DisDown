@@ -1,0 +1,107 @@
+{
+  "name": "disdown",
+  "version": "0.1.0",
+  "description": "Choose the Discord content you want to keep. A local, read-only desktop archive client.",
+  "main": "dist-electron/main/index.cjs",
+  "author": "H644b",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build && node scripts/build-electron.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:desktop": "node scripts/desktop-smoke.mjs",
+    "check": "npm run build && npm test && npm run test:e2e && npm run test:desktop",
+    "icons": "node scripts/icons.mjs",
+    "pack": "electron-builder --dir --publish never",
+    "dist": "electron-builder --publish never",
+    "verify:live": "node scripts/verify-live.mjs"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "lucide-react": "^1.63.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/archiver": "^7.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "latest",
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0",
+    "esbuild": "latest",
+    "fflate": "^0.8.3",
+    "prettier": "^3.9.10",
+    "sharp": "^0.35.5",
+    "typescript": "latest",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "build": {
+    "appId": "com.disdown.app",
+    "productName": "DisDown",
+    "artifactName": "DisDown-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "identity": null
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "artifactName": "DisDown-${version}-windows-${arch}-setup.${ext}"
+    },
+    "linux": {
+      "icon": "build/icons",
+      "category": "Utility",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "maintainer": "H644b <h644b@users.noreply.github.com>"
+    },
+    "publish": null,
+    "portable": {
+      "artifactName": "DisDown-${version}-windows-${arch}-portable.${ext}"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/H644b/DisDown.git"
+  },
+  "homepage": "https://github.com/H644b/DisDown",
+  "bugs": {
+    "url": "https://github.com/H644b/DisDown/issues"
+  }
+}
