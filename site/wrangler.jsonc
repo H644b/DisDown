@@ -3,6 +3,9 @@
   "name": "disdown",
   "compatibility_date": "2026-10-29",
   "workers_dev": true,
+  "routes": [
+    { "pattern": "disdown.timsfun.com", "custom_domain": true }
+  ],
   "send_metrics": false,
   "assets": {
     "directory": "./dist",

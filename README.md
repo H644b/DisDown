@@ -4,7 +4,7 @@
 
 DisDown is a local, read-only desktop app for choosing accessible Discord content and saving it to your computer. Browse a familiar server rail, channel tree, and conversation view. Build a collection without leaving the conversation, choose an export format, then save through DisDown’s themed folder browser.
 
-Visit the [DisDown website](https://disdown.timur-radjabov1.workers.dev) for the app tour, sample archives, and downloads.
+Visit the [DisDown website](https://disdown.timsfun.com) for the app tour, sample archives, and downloads.
 
 ![DisDown browsing sample data](docs/screenshots/browser.png)
 
