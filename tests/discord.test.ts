@@ -191,7 +191,7 @@ describe("Discord read-only API", () => {
     await c.connect();
     const v = await c.guild("10");
     expect(v.channels.map((x) => x.id)).toEqual(["40"]);
-    expect(v.threads.map((x) => x.id)).toEqual(["50"]);
+    expect(v.threads).toEqual([]);
     expect(v.extras.map((x) => x.kind)).toEqual(["role", "emoji", "event"]);
     expect(await c.profile("2", "10")).toHaveProperty("bio", "A biography");
     await c.messages("40", "123");
@@ -200,7 +200,7 @@ describe("Discord read-only API", () => {
     const paths: string[] = [];
     const c = new DiscordClient(
       token,
-      "user",
+      "bot",
       transport((p) => {
         paths.push(p);
         const b = base(p);
@@ -236,6 +236,83 @@ describe("Discord read-only API", () => {
     expect(
       paths.some((p) => p.includes("before=2026-10-01T00%3A00%3A00Z")),
     ).toBe(true);
+  });
+  it("uses account thread search for active and archived forum posts, paginates and deduplicates", async () => {
+    const paths: string[] = [];
+    const c = new DiscordClient(
+      token,
+      "user",
+      transport((p) => {
+        paths.push(p);
+        const b = base(p);
+        if (b) return json(b);
+        if (p.includes("threads/search")) {
+          const params = new URL("https://discord.com" + p).searchParams;
+          const archived = params.get("archived") === "true";
+          const offset = Number(params.get("offset"));
+          return json(
+            archived
+              ? {
+                  threads: [
+                    { id: "51", type: 11, thread_metadata: { archived: true } },
+                    { id: "53", type: 11, thread_metadata: { archived: true } },
+                  ],
+                  has_more: false,
+                }
+              : offset === 0
+                ? {
+                    threads: [
+                      { id: "50", type: 11 },
+                      { id: "51", type: 11 },
+                    ],
+                    has_more: true,
+                  }
+                : { threads: [{ id: "52", type: 11 }], has_more: false },
+          );
+        }
+        throw new Error("Unexpected route " + p);
+      }),
+    );
+    await c.connect();
+    const channel = { id: "40", guild_id: "10", type: 15 };
+    const first = await c.threadPage(channel);
+    expect(first.threads.map((t) => t.id)).toEqual(["50", "51"]);
+    expect(first.cursor).toEqual({ archived: false, offset: 2 });
+    const all = await c.threads(channel);
+    expect(all.threads.map((t) => t.id)).toEqual(["50", "51", "52", "53"]);
+    expect(paths.some((p) => p.includes("threads/active"))).toBe(false);
+    expect(paths.some((p) => p.includes("archived=true"))).toBe(true);
+    expect(
+      all.threads.every((t) => t.parent_id === "40" && t.guild_id === "10"),
+    ).toBe(true);
+  });
+  it("opens archived-only forums and stops on an inconsistent empty search page", async () => {
+    const c = new DiscordClient(
+      token,
+      "user",
+      transport((p) => {
+        const b = base(p);
+        if (b) return json(b);
+        return json(
+          p.includes("archived=true")
+            ? { threads: [{ id: "90", type: 11 }], has_more: false }
+            : { threads: [], has_more: false },
+        );
+      }),
+    );
+    await c.connect();
+    expect((await c.threadPage({ id: "40", type: 15 })).threads[0].id).toBe(
+      "90",
+    );
+    const broken = new DiscordClient(
+      token,
+      "user",
+      transport((p) => json(base(p) || { threads: [], has_more: true })),
+    );
+    await broken.connect();
+    const page = await broken.threadPage({ id: "40", type: 15 });
+    expect(page.cursor).toBeUndefined();
+    expect(page.warnings[0]).toContain("empty thread page");
   });
   it("paginates reaction users and encodes emoji once", async () => {
     const paths: string[] = [];

@@ -2685,3 +2685,19 @@ progress:indeterminate::-webkit-progress-bar {
     scroll-behavior: auto !important;
   }
 }
+
+.forum-description {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 12px 0 10px;
+  line-height: 1.7;
+}
+.forum-notices {
+  color: var(--warning);
+  font-size: 11px;
+  margin: 16px 0;
+}
+.load-posts {
+  display: flex;
+  margin: 22px auto;
+}

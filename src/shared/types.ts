@@ -158,6 +158,7 @@ export interface GuildView {
 export interface ThreadPage {
   threads: Channel[];
   warnings: string[];
+  cursor?: { archived: boolean; offset: number };
 }
 export interface DirectoryEntry {
   name: string;
@@ -222,6 +223,10 @@ export interface DisdownBridge {
   guild(id: string): Promise<GuildView>;
   messages(channelId: string, before?: string): Promise<Message[]>;
   threads(channel: Channel): Promise<ThreadPage>;
+  threadPage(
+    channel: Channel,
+    cursor?: ThreadPage["cursor"],
+  ): Promise<ThreadPage>;
   profile(id: string, guildId?: string): Promise<Record<string, unknown>>;
   reactionUsers(
     channelId: string,

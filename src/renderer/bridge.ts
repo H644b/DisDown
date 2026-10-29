@@ -20,6 +20,7 @@ export const bridge: DisdownBridge = window.disdown || {
   guild: (id) => sample.guild(id),
   messages: (id, before) => sample.messages(id, before),
   threads: (c) => sample.threads(c),
+  threadPage: (c) => sample.threadPage(c),
   profile: (id) => sample.profile(id),
   reactionUsers: () => sample.reactionUsers(),
   browse: desktopOnly,

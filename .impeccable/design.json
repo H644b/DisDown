@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T01:47:21Z",
+  "title": "Design System: DisDown",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Lavender Ink",
+        "tonalRamp": [
+          "oklch(15% 0.11437 296.25)",
+          "oklch(26% 0.11437 296.25)",
+          "oklch(37% 0.11437 296.25)",
+          "oklch(48% 0.11437 296.25)",
+          "oklch(59% 0.11437 296.25)",
+          "oklch(70% 0.11437 296.25)",
+          "oklch(82% 0.11437 296.25)",
+          "oklch(95% 0.11437 296.25)"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Plum Ink",
+        "tonalRamp": [
+          "oklch(15% 0.03259 303.08)",
+          "oklch(26% 0.03259 303.08)",
+          "oklch(37% 0.03259 303.08)",
+          "oklch(48% 0.03259 303.08)",
+          "oklch(59% 0.03259 303.08)",
+          "oklch(70% 0.03259 303.08)",
+          "oklch(82% 0.03259 303.08)",
+          "oklch(95% 0.03259 303.08)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Lifted Lavender",
+        "tonalRamp": [
+          "oklch(15% 0.09042 297.28)",
+          "oklch(26% 0.09042 297.28)",
+          "oklch(37% 0.09042 297.28)",
+          "oklch(48% 0.09042 297.28)",
+          "oklch(59% 0.09042 297.28)",
+          "oklch(70% 0.09042 297.28)",
+          "oklch(82% 0.09042 297.28)",
+          "oklch(95% 0.09042 297.28)"
+        ]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Deep Rail",
+        "tonalRamp": [
+          "oklch(15% 0.01162 277.97)",
+          "oklch(26% 0.01162 277.97)",
+          "oklch(37% 0.01162 277.97)",
+          "oklch(48% 0.01162 277.97)",
+          "oklch(59% 0.01162 277.97)",
+          "oklch(70% 0.01162 277.97)",
+          "oklch(82% 0.01162 277.97)",
+          "oklch(95% 0.01162 277.97)"
+        ]
+      },
+      "sidebar": {
+        "role": "neutral",
+        "displayName": "Charcoal Sidebar",
+        "tonalRamp": [
+          "oklch(15% 0.01491 279.71)",
+          "oklch(26% 0.01491 279.71)",
+          "oklch(37% 0.01491 279.71)",
+          "oklch(48% 0.01491 279.71)",
+          "oklch(59% 0.01491 279.71)",
+          "oklch(70% 0.01491 279.71)",
+          "oklch(82% 0.01491 279.71)",
+          "oklch(95% 0.01491 279.71)"
+        ]
+      },
+      "main": {
+        "role": "neutral",
+        "displayName": "Slate Conversation",
+        "tonalRamp": [
+          "oklch(15% 0.01632 280.34)",
+          "oklch(26% 0.01632 280.34)",
+          "oklch(37% 0.01632 280.34)",
+          "oklch(48% 0.01632 280.34)",
+          "oklch(59% 0.01632 280.34)",
+          "oklch(70% 0.01632 280.34)",
+          "oklch(82% 0.01632 280.34)",
+          "oklch(95% 0.01632 280.34)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Charcoal Tray",
+        "tonalRamp": [
+          "oklch(15% 0.01485 279.73)",
+          "oklch(26% 0.01485 279.73)",
+          "oklch(37% 0.01485 279.73)",
+          "oklch(48% 0.01485 279.73)",
+          "oklch(59% 0.01485 279.73)",
+          "oklch(70% 0.01485 279.73)",
+          "oklch(82% 0.01485 279.73)",
+          "oklch(95% 0.01485 279.73)"
+        ]
+      },
+      "input": {
+        "role": "neutral",
+        "displayName": "Recessed Field",
+        "tonalRamp": [
+          "oklch(15% 0.01334 278.95)",
+          "oklch(26% 0.01334 278.95)",
+          "oklch(37% 0.01334 278.95)",
+          "oklch(48% 0.01334 278.95)",
+          "oklch(59% 0.01334 278.95)",
+          "oklch(70% 0.01334 278.95)",
+          "oklch(82% 0.01334 278.95)",
+          "oklch(95% 0.01334 278.95)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Fine Divider",
+        "tonalRamp": [
+          "oklch(15% 0.01891 281.30)",
+          "oklch(26% 0.01891 281.30)",
+          "oklch(37% 0.01891 281.30)",
+          "oklch(48% 0.01891 281.30)",
+          "oklch(59% 0.01891 281.30)",
+          "oklch(70% 0.01891 281.30)",
+          "oklch(82% 0.01891 281.30)",
+          "oklch(95% 0.01891 281.30)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Lavender Gray",
+        "tonalRamp": [
+          "oklch(15% 0.02412 283.13)",
+          "oklch(26% 0.02412 283.13)",
+          "oklch(37% 0.02412 283.13)",
+          "oklch(48% 0.02412 283.13)",
+          "oklch(59% 0.02412 283.13)",
+          "oklch(70% 0.02412 283.13)",
+          "oklch(82% 0.02412 283.13)",
+          "oklch(95% 0.02412 283.13)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Soft White",
+        "tonalRamp": [
+          "oklch(15% 0.00799 286.25)",
+          "oklch(26% 0.00799 286.25)",
+          "oklch(37% 0.00799 286.25)",
+          "oklch(48% 0.00799 286.25)",
+          "oklch(59% 0.00799 286.25)",
+          "oklch(70% 0.00799 286.25)",
+          "oklch(82% 0.00799 286.25)",
+          "oklch(95% 0.00799 286.25)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Raised Neutral",
+        "tonalRamp": [
+          "oklch(15% 0.02068 281.54)",
+          "oklch(26% 0.02068 281.54)",
+          "oklch(37% 0.02068 281.54)",
+          "oklch(48% 0.02068 281.54)",
+          "oklch(59% 0.02068 281.54)",
+          "oklch(70% 0.02068 281.54)",
+          "oklch(82% 0.02068 281.54)",
+          "oklch(95% 0.02068 281.54)"
+        ]
+      },
+      "secondary-hover": {
+        "role": "neutral",
+        "displayName": "Lifted Neutral",
+        "tonalRamp": [
+          "oklch(15% 0.02339 282.07)",
+          "oklch(26% 0.02339 282.07)",
+          "oklch(37% 0.02339 282.07)",
+          "oklch(48% 0.02339 282.07)",
+          "oklch(59% 0.02339 282.07)",
+          "oklch(70% 0.02339 282.07)",
+          "oklch(82% 0.02339 282.07)",
+          "oklch(95% 0.02339 282.07)"
+        ]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Quiet Green",
+        "tonalRamp": [
+          "oklch(15% 0.07653 157.32)",
+          "oklch(26% 0.07653 157.32)",
+          "oklch(37% 0.07653 157.32)",
+          "oklch(48% 0.07653 157.32)",
+          "oklch(59% 0.07653 157.32)",
+          "oklch(70% 0.07653 157.32)",
+          "oklch(82% 0.07653 157.32)",
+          "oklch(95% 0.07653 157.32)"
+        ]
+      },
+      "warning": {
+        "role": "secondary",
+        "displayName": "Warm Amber",
+        "tonalRamp": [
+          "oklch(15% 0.09197 80.08)",
+          "oklch(26% 0.09197 80.08)",
+          "oklch(37% 0.09197 80.08)",
+          "oklch(48% 0.09197 80.08)",
+          "oklch(59% 0.09197 80.08)",
+          "oklch(70% 0.09197 80.08)",
+          "oklch(82% 0.09197 80.08)",
+          "oklch(95% 0.09197 80.08)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Welcome Display",
+        "purpose": "The two-line welcome heading, using the native desktop UI family."
+      },
+      "headline": {
+        "displayName": "Flow Headline",
+        "purpose": "The export configuration heading."
+      },
+      "title": {
+        "displayName": "Conversation Title",
+        "purpose": "The channel introduction heading."
+      },
+      "body": {
+        "displayName": "Transcript Body",
+        "purpose": "Compact message text with a bounded reading measure."
+      },
+      "label": {
+        "displayName": "Action Label",
+        "purpose": "The standard primary and secondary action labels."
+      },
+      "metadata": {
+        "displayName": "Supporting Metadata",
+        "purpose": "Small hints and secondary interface copy."
+      }
+    },
+    "shadows": [
+      {
+        "name": "primary-hover",
+        "value": "0 4px 12px #0002",
+        "purpose": "Small lift on an enabled primary button."
+      },
+      {
+        "name": "embed-inset",
+        "value": "inset 0 1px 0 #ffffff04",
+        "purpose": "Subtle top highlight inside a conversation embed."
+      },
+      {
+        "name": "save-illustration",
+        "value": "0 12px 34px #18151f66",
+        "purpose": "Diffuse depth beneath the archive glyph."
+      },
+      {
+        "name": "save-action",
+        "value": "0 4px 30px #bba5f52e, 0 12px 24px #15121a55",
+        "purpose": "The requested lavender glow around Save collection."
+      },
+      {
+        "name": "save-action-hover",
+        "value": "0 4px 40px #bba5f544, 0 12px 24px #15121a55",
+        "purpose": "A stronger ambient glow on save-action hover."
+      },
+      {
+        "name": "folder-dialog",
+        "value": "0 22px 90px #0006",
+        "purpose": "Diffuse separation above the dimmed, blurred application backdrop."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-state",
+        "value": "background 0.16s, color 0.16s, box-shadow 0.16s",
+        "purpose": "The source button state transition list; default CSS easing applies."
+      },
+      {
+        "name": "message-hover",
+        "value": "background 0.15s",
+        "purpose": "A quiet hover wash on message rows."
+      },
+      {
+        "name": "loading-spinner",
+        "value": "spin 1s linear infinite",
+        "purpose": "Rotation while content is loading."
+      },
+      {
+        "name": "receiving",
+        "value": "receiving 2.5s ease-in-out infinite",
+        "purpose": "Pulse the save glyph background and shadow during an active export."
+      },
+      {
+        "name": "packet",
+        "value": "packet 1.9s cubic-bezier(0.16, 1, 0.3, 1) infinite",
+        "purpose": "Four offset packet streams descend into the archive glyph."
+      },
+      {
+        "name": "saved",
+        "value": "saved 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The completed glyph scales from 0.8 to 1 and clears a 3px blur."
+      },
+      {
+        "name": "indeterminate-progress",
+        "value": "progress-wave 1.7s linear infinite",
+        "purpose": "Move the progress background while a precise percentage is unavailable."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none !important; transition: none !important; scroll-behavior: auto !important",
+        "purpose": "Applied to all elements and pseudo-elements under prefers-reduced-motion: reduce; state and progress text remain visible."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "min-width-wide-desktop",
+        "value": "1550px"
+      },
+      {
+        "name": "max-width-compact-desktop",
+        "value": "1200px"
+      },
+      {
+        "name": "max-height-compact-desktop",
+        "value": "800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The next enabled action in the collection flow.",
+      "html": "<div class=\"ds-specimen\"><button class=\"ds-btn ds-primary\">Choose export options <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"m12 5 7 7-7 7\"></path></svg></button></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-primary, .ds-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 650; white-space: nowrap; min-height: 42px; }\n.ds-primary { background: var(--accent, #bba5f5); color: var(--accent-dark, #282132); }\n.ds-primary:hover:not(:disabled) { background: #ccbafa; box-shadow: 0 4px 12px #0002; }\n.ds-secondary { background: #3b3c48; color: var(--text, #f0f0f6); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A quiet supporting action beside a primary choice.",
+      "html": "<div class=\"ds-specimen\"><button class=\"ds-btn ds-secondary\">Cancel</button></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-primary, .ds-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 650; white-space: nowrap; min-height: 42px; }\n.ds-primary { background: var(--accent, #bba5f5); color: var(--accent-dark, #282132); }\n.ds-secondary { background: #3b3c48; color: var(--text, #f0f0f6); }\n.ds-secondary:hover:not(:disabled) { background: #474856; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "A recessed field with a lavender caret and focus border.",
+      "html": "<div class=\"ds-specimen\"><label class=\"ds-field-label\" for=\"ds-archive-name\">Archive filename</label><input class=\"ds-text-input\" id=\"ds-archive-name\" value=\"DisDown-2026-10-28\" /></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-text-input { font: inherit; }\n.ds-text-input { color: var(--text, #f0f0f6); min-width: 0; background: var(--input, #1f2027); border: 1px solid transparent; border-radius: 7px; padding: 11px 12px; caret-color: var(--accent, #bba5f5); }\n.ds-text-input::placeholder { color: #a4a5b8; }\n.ds-text-input:focus { border-color: var(--accent, #bba5f5); outline: none; }\n.ds-field-label { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; margin-bottom: 9px; color: #d2d3df; }\n.ds-text-input { font: inherit; }"
+    },
+    {
+      "name": "Server Navigation",
+      "kind": "nav",
+      "refersTo": "server-navigation",
+      "description": "Rounded server marks on a deep rail, with a visible active indicator.",
+      "html": "<div class=\"ds-specimen\"><nav class=\"ds-server-rail\" aria-label=\"Servers\"><button class=\"ds-btn ds-rail-button ds-active\" aria-label=\"The Commons\" aria-pressed=\"true\">C</button><button class=\"ds-btn ds-rail-button\" aria-label=\"Design Archive\">DA</button></nav></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-server-rail { width: 72px; flex: none; background: var(--rail, #1c1d23); display: flex; flex-direction: column; gap: 12px; align-items: center; padding: 19px 0 16px; overflow: auto; }\n.ds-rail-button { width: 45px; height: 45px; flex: none; background: #353640; border-radius: 15px; display: grid; place-items: center; font-size: 14px; font-weight: 700; color: #e0d7fa; position: relative; }\n.ds-rail-button:hover { border-radius: 13px; filter: brightness(1.12); }\n.ds-rail-button.ds-active:before { content: \"\"; width: 3px; height: 30px; background: #e6dcfc; position: absolute; left: -14px; border-radius: 0 3px 3px 0; }\n.ds-rail-button.ds-active { background: var(--accent, #bba5f5); color: var(--accent-dark, #282132); }"
+    },
+    {
+      "name": "Channel Navigation",
+      "kind": "nav",
+      "refersTo": "channel-navigation-active",
+      "description": "A compact active channel row keeps browsing and selection separate.",
+      "html": "<div class=\"ds-specimen\"><nav aria-label=\"Channels\"><div class=\"ds-channel-row ds-active\"><button class=\"ds-btn ds-channel-target\" aria-current=\"page\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><line x1=\"4\" x2=\"20\" y1=\"9\" y2=\"9\"></line><line x1=\"4\" x2=\"20\" y1=\"15\" y2=\"15\"></line><line x1=\"10\" x2=\"8\" y1=\"3\" y2=\"21\"></line><line x1=\"16\" x2=\"14\" y1=\"3\" y2=\"21\"></line></svg><span>general</span></button><button class=\"ds-btn ds-pick\" aria-label=\"Select channel: general\" aria-pressed=\"false\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path></svg></button></div></nav></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-pick { display: inline-flex; align-items: center; justify-content: center; width: 23px; height: 23px; flex: none; padding: 0; color: #aaa6bb; background: #ffffff05; border: 1px solid #5a566b; border-radius: 6px; }\n.ds-pick:hover { background: #bba5f524; color: #e2d8fa; border-color: var(--accent, #bba5f5); }\n.ds-pick.ds-checked { background: #bba5f52b; border-color: var(--accent, #bba5f5); color: #dfd1ff; }\n.ds-channel-row { display: flex; align-items: center; gap: 4px; padding: 0 7px; border-radius: 6px; margin: 2px 0; height: 34px; color: #b1b2c5; }\n.ds-channel-row:hover { background: #ffffff05; }\n.ds-channel-row.ds-active { background: #3d374f; color: #e5d9fd; }\n.ds-channel-row .ds-pick { opacity: 0.55; border-color: transparent; background: transparent; }\n.ds-channel-row:hover .ds-pick, .ds-channel-row .ds-pick.ds-checked { opacity: 1; border-color: #6d5e8b; }\n.ds-channel-target { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; text-align: left; height: 100%; padding: 0; font-size: 12px; }\n.ds-channel-target > svg { color: #a9a6ba; }\n.ds-channel-target > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.ds-channel-row.ds-active .ds-channel-target > svg { color: #d0b4fa; }"
+    },
+    {
+      "name": "Selection Toggle",
+      "kind": "button",
+      "refersTo": "selection-toggle",
+      "description": "A plus changes to a check when the export selection is active.",
+      "html": "<div class=\"ds-specimen\"><button class=\"ds-btn ds-pick\" aria-label=\"Select message\" aria-pressed=\"false\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path></svg></button> <button class=\"ds-btn ds-pick ds-checked\" aria-label=\"Deselect message\" aria-pressed=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"></path></svg></button></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-pick { display: inline-flex; align-items: center; justify-content: center; width: 23px; height: 23px; flex: none; padding: 0; color: #aaa6bb; background: #ffffff05; border: 1px solid #5a566b; border-radius: 6px; }\n.ds-pick:hover { background: #bba5f524; color: #e2d8fa; border-color: var(--accent, #bba5f5); }\n.ds-pick.ds-checked { background: #bba5f52b; border-color: var(--accent, #bba5f5); color: #dfd1ff; }\n.ds-pick.ds-small { width: 19px; height: 19px; border-radius: 5px; }"
+    },
+    {
+      "name": "Reaction Chip",
+      "kind": "chip",
+      "refersTo": "reaction-chip",
+      "description": "A real content emoji and count beside the selection action.",
+      "html": "<div class=\"ds-specimen\"><div class=\"ds-reaction\"><button class=\"ds-btn\" aria-label=\"Inspect reaction\"><span>💜</span><span>8</span></button><button class=\"ds-btn ds-pick\" aria-label=\"Select reaction\" aria-pressed=\"false\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path></svg></button></div></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-pick:hover { background: #bba5f524; color: #e2d8fa; border-color: var(--accent, #bba5f5); }\n.ds-reaction { display: flex; align-items: center; gap: 4px; background: #34313f; border: 1px solid #4c435e; border-radius: 6px; height: 28px; padding: 0 5px; }\n.ds-reaction.ds-selected { background: #4b3d65; border-color: #a68acd; }\n.ds-reaction > button:first-child { display: flex; gap: 6px; align-items: center; font-size: 10px; padding: 0 2px; }\n.ds-reaction > button:first-child > span:first-child { font-size: 15px; }\n.ds-reaction .ds-pick { border: 0; background: none; width: 14px; height: 17px; color: #b6a6cf; }"
+    },
+    {
+      "name": "Attachment Card",
+      "kind": "card",
+      "refersTo": "attachment-card",
+      "description": "A compact file block inside the transcript with its own selection action.",
+      "html": "<div class=\"ds-specimen\"><div class=\"ds-attachment\"><div class=\"ds-attachment-file\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"27\" height=\"27\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z\"></path><path d=\"M14 2v5a1 1 0 0 0 1 1h5\"></path><path d=\"M10 9H8\"></path><path d=\"M16 13H8\"></path><path d=\"M16 17H8\"></path></svg><div><strong>weekend-moodboard.txt</strong><span>126 B · attachment</span></div></div><button class=\"ds-btn ds-pick\" aria-label=\"Select attachment\" aria-pressed=\"false\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path></svg></button></div></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-pick { display: inline-flex; align-items: center; justify-content: center; width: 23px; height: 23px; flex: none; padding: 0; color: #aaa6bb; background: #ffffff05; border: 1px solid #5a566b; border-radius: 6px; }\n.ds-pick:hover { background: #bba5f524; color: #e2d8fa; border-color: var(--accent, #bba5f5); }\n.ds-pick.ds-checked { background: #bba5f52b; border-color: var(--accent, #bba5f5); color: #dfd1ff; }\n.ds-attachment { display: flex; gap: 14px; align-items: center; justify-content: space-between; max-width: 365px; background: #24252e; border: 1px solid #45434f; border-radius: 8px; padding: 13px; margin: 11px 0; }\n.ds-attachment-file { display: flex; align-items: center; gap: 12px; color: #ae9ad6; min-width: 0; }\n.ds-attachment-file > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }\n.ds-attachment-file strong { font-size: 11px; color: #d1c0f3; overflow-wrap: anywhere; }\n.ds-attachment-file span { font-size: 9px; color: #aaaabd; }"
+    },
+    {
+      "name": "Glowing Save Action",
+      "kind": "button",
+      "refersTo": "save-action",
+      "description": "The larger glowing action reserved for saving the collection.",
+      "html": "<div class=\"ds-specimen\"><button class=\"ds-btn ds-glow-save\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 15V3\"></path><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path><path d=\"m7 10 5 5 5-5\"></path></svg> Save collection <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14\"></path><path d=\"m19 12-7 7-7-7\"></path></svg></button></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-glow-save { width: 100%; padding: 18px 24px; border-radius: 11px; display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--accent, #bba5f5); color: #2a2136; font-weight: 700; font-size: 15px; box-shadow: 0 4px 30px #bba5f52e, 0 12px 24px #15121a55; min-height: 58px; }\n.ds-glow-save > svg:last-child { margin-left: auto; width: 17px; }\n.ds-glow-save > svg:first-child { margin-right: auto; }\n.ds-glow-save:hover { background: #d2bffb; box-shadow: 0 4px 40px #bba5f544, 0 12px 24px #15121a55; }"
+    },
+    {
+      "name": "Folder Picker",
+      "kind": "custom",
+      "refersTo": "folder-dialog",
+      "description": "The protected destination chooser, with shortcut navigation and an explicit confirmation footer.",
+      "html": "<div class=\"ds-specimen\"><section class=\"ds-folder-picker\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"ds-picker-title\"><header><div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg><h2 id=\"ds-picker-title\">A place for your collection</h2></div><button class=\"ds-btn ds-icon-button\" aria-label=\"Close folder picker\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path></svg></button></header><div class=\"ds-picker-layout\"><nav aria-label=\"Folder shortcuts\"><button class=\"ds-btn ds-active\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg>Documents</button><button class=\"ds-btn\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg>Downloads</button></nav><div class=\"ds-picker-main\"><div class=\"ds-directory-entries\"><button class=\"ds-btn ds-directory-entry\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg><span>My archive</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"m12 5 7 7-7 7\"></path></svg></button></div></div></div><footer><span>Documents / My archive</span><button class=\"ds-btn ds-secondary\">Cancel</button><button class=\"ds-btn ds-primary\">Use this folder <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"></path></svg></button></footer></section></div>",
+      "css": ".ds-specimen { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; font-size: 14px; color: var(--text, #f0f0f6); }\n.ds-btn { font: inherit; cursor: pointer; border: 0; color: inherit; background: none; transition: background 0.16s, color 0.16s, box-shadow 0.16s; } .ds-btn:disabled { cursor: default; opacity: 0.45; } .ds-btn:focus-visible { outline: 2px solid var(--accent, #bba5f5); outline-offset: 3px; }\n.ds-primary, .ds-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 650; white-space: nowrap; min-height: 42px; }\n.ds-primary { background: var(--accent, #bba5f5); color: var(--accent-dark, #282132); }\n.ds-primary:hover:not(:disabled) { background: #ccbafa; box-shadow: 0 4px 12px #0002; }\n.ds-secondary { background: #3b3c48; color: var(--text, #f0f0f6); }\n.ds-secondary:hover:not(:disabled) { background: #474856; }\n.ds-icon-button { width: 28px; height: 28px; display: inline-grid; place-items: center; border-radius: 6px; color: var(--muted, #b0b1c2); padding: 0; }\n.ds-icon-button:hover { background: #ffffff0d; color: var(--text, #f0f0f6); }\n.ds-folder-picker { width: 850px; max-width: 100%; height: 560px; max-height: 90vh; background: #29262f; border-radius: 14px; box-shadow: 0 22px 90px #0006; display: flex; flex-direction: column; overflow: hidden; outline: none; }\n.ds-folder-picker > header { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 25px; border-bottom: 1px solid #433b4c; flex: none; }\n.ds-folder-picker > header > div { display: flex; align-items: center; gap: 12px; color: #c7afea; }\n.ds-folder-picker h2 { font-size: 16px; color: #f0e8fa; letter-spacing: -0.3px; }\n.ds-picker-layout { display: flex; flex: 1; min-height: 0; }\n.ds-picker-layout > nav { width: 155px; flex: none; padding: 18px 10px; background: #231f29; overflow: auto; }\n.ds-picker-layout > nav > button { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #bbaecc; padding: 11px 13px; width: 100%; border-radius: 6px; text-align: left; }\n.ds-picker-layout > nav > button:hover { background: #3a3046; }\n.ds-picker-layout > nav > .ds-active { background: #42344f; color: #e6d4fa; }\n.ds-picker-main { flex: 1; display: flex; flex-direction: column; min-width: 0; padding: 15px 20px 10px; }\n.ds-directory-entries { flex: 1; overflow: auto; }\n.ds-directory-entry { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 9px; font-size: 11px; text-align: left; color: #c1a6de; border-radius: 5px; }\n.ds-directory-entry:hover:not(:disabled) { background: #3d3249; }\n.ds-directory-entry > span { flex: 1; color: #d8cde3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.ds-folder-picker > footer { display: flex; gap: 10px; padding: 17px 22px; border-top: 1px solid #43384d; align-items: center; flex: none; }\n.ds-folder-picker > footer > span { font-size: 10px; color: #b3a0c7; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.ds-folder-picker > footer > button { font-size: 11px; min-height: 35px; padding: 10px 15px; }\n.ds-folder-picker h2 { margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Discord-style archive client",
+    "overview": "DisDown uses familiar desktop client density: charcoal navigation, a slate conversation plane, quiet separators, and muted lavender selection ink. System UI typography keeps conversation content and controls easy to scan. This record covers the Electron-hosted renderer for macOS, Windows, and Linux, as implemented in `src/renderer/App.tsx` and `src/renderer/styles.css`.\n\nBrand appears in the original D-and-download monogram, rounded square server marks, and the deliberate save moment. Most surfaces stay flat and tonal; the large Save collection control receives the lavender glow. Selection remains visible beside its source content, while the collection and export stages provide a steady path to a local archive.",
+    "keyCharacteristics": [
+      "Tonal charcoal surfaces with one lavender interaction accent.",
+      "Compact desktop controls, readable transcripts, and independent scrolling regions.",
+      "Explicit plus/check selection controls and persistent collection feedback.",
+      "A restrained save animation, with stable reduced-motion states.",
+      "Original geometric branding and consistent Lucide outline icons."
+    ],
+    "rules": [
+      {
+        "name": "The Selection Ink Rule",
+        "body": "Use lavender for active navigation, selected objects, focus, links, and the next primary action. Keep connection and completed-save feedback in the established green family.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tonal Surface Rule",
+        "body": "Separate the everyday client regions through their charcoal values and fine dividers. Reserve large soft shadows for the destination dialog and the save moment.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Save Ritual Rule",
+        "body": "The large glowing control and receiving-packet animation belong to saving a collection. Keep ordinary navigation and selection transitions brief and quiet.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use the existing charcoal layers and lavender interaction roles for new renderer controls.",
+      "Do keep selection controls explicit and show the checked state beside the original object.",
+      "Do preserve visible keyboard focus, the folder dialog focus boundary, and focus restoration on close.",
+      "Do retain scrollable content regions and accessible bottom actions at the minimum desktop window size.",
+      "Do honor reduced motion while preserving the real progress, completion, and error information.",
+      "Do derive packaged logo rasters from the original repository vector and retain the asset provenance record."
+    ],
+    "donts": [
+      "Don't use the full lavender save glow on ordinary navigation or selection controls.",
+      "Don't rely on hover alone to reveal the focused or checked message controls.",
+      "Don't replace the original DisDown monogram or the consistent outline icon family with unrelated marks.",
+      "Don't use green completion styling for an incomplete save or hide export notices behind decorative success feedback."
+    ]
+  }
+}

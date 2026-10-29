@@ -248,3 +248,43 @@ test("minimum desktop size keeps navigation and selections accessible", async ()
   ).toBeInViewport();
   await page.screenshot({ path: "artifacts/minimum-window.png" });
 });
+
+test("forum channels open directly to selectable posts and return from the thread", async () => {
+  await sample();
+  await page.getByRole("button", { name: "resources", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Posts in #resources" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /Our favorite type foundries/ }).first(),
+  ).toBeVisible();
+  await page
+    .getByRole("button", {
+      name: "Select thread: Our favorite type foundries",
+      exact: true,
+    })
+    .click();
+  await page
+    .getByRole("button", { name: /Our favorite type foundries/ })
+    .first()
+    .click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Our favorite type foundries",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Back to forum", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Posts in #resources" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Deselect thread: Our favorite type foundries",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page.screenshot({ path: "artifacts/forum.png" });
+});

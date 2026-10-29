@@ -320,6 +320,37 @@ describe("archive formats, files and cancellation", () => {
     ).rejects.toThrow("Cancelled");
     expect(await readdir(folder)).toEqual([]);
   });
+  it("cancels during ZIP compression without hanging or leaving output", async () => {
+    const control = ac();
+    const client = new DemoClient();
+    client.messages = async () =>
+      Array.from({ length: 40 }, (_, i) => ({
+        ...demoMessages[0],
+        id: String(90000 + i),
+        content: Array.from({ length: 5000 }, () =>
+          Math.random().toString(36),
+        ).join(" "),
+      }));
+    const r = request({
+      selections: [
+        channelSelection({ id: "30004", type: 0, name: "Large sample" }),
+      ],
+      options: {
+        ...options(),
+        format: "json",
+        packaging: "zip",
+        profiles: false,
+        threads: false,
+      },
+      filename: "cancelled.zip",
+    });
+    await expect(
+      exportArchive(client, r, control.signal, (p) => {
+        if (p.phase === "writing") setTimeout(() => control.abort(), 0);
+      }),
+    ).rejects.toThrow("Cancelled");
+    expect(await readdir(folder)).toEqual([]);
+  });
   it("blocks remote attachment hosts and never forwards account credentials", async () => {
     const c = new DemoClient();
     c.info.mode = "user";

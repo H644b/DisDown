@@ -70,6 +70,7 @@ import {
   type Message,
   type Progress,
   type Selection,
+  type ThreadPage,
   type SessionInfo,
   type User,
 } from "../shared/types";
@@ -448,12 +449,27 @@ export default function App() {
   }>();
   const [threadView, setThreadView] = useState<Channel[]>([]);
   const [showThreads, setShowThreads] = useState(false);
+  const [threadCursor, setThreadCursor] = useState<ThreadPage["cursor"]>();
+  const [threadWarnings, setThreadWarnings] = useState<string[]>([]);
   const [inspectorBusy, setInspectorBusy] = useState(false);
   const [extraTab, setExtraTab] = useState(false);
   const requestId = useRef(0);
   const guildRequest = useRef(0);
   const inspectRequest = useRef(0);
   const messageArea = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!window.disdown) return;
+    let mounted = true;
+    void bridge
+      .session()
+      .then((info) => {
+        if (mounted && info) startSession(info);
+      })
+      .catch((failure) => setError(failure.message));
+    return () => {
+      mounted = false;
+    };
+  }, []);
   const toggle = (s: Selection) =>
     setSelected((prev) => {
       const next = new Map(prev);
@@ -470,10 +486,25 @@ export default function App() {
     setChannel(c);
     setQuery("");
     setMessages([]);
-    setShowThreads(false);
+    const forum = [15, 16].includes(c.type);
+    setShowThreads(forum);
+    setExtraTab(false);
+    setThreadView([]);
+    setThreadCursor(undefined);
+    setThreadWarnings([]);
     setLoadingMessages(true);
     setHasMore(true);
     try {
+      if (forum) {
+        setBusy(true);
+        const page = await bridge.threadPage(c);
+        if (nonce !== requestId.current) return;
+        setThreadView(page.threads);
+        setThreadCursor(page.cursor);
+        setThreadWarnings(page.warnings);
+        setHasMore(false);
+        return;
+      }
       const page = await bridge.messages(c.id);
       if (nonce !== requestId.current) return;
       setMessages([...page].reverse());
@@ -488,7 +519,10 @@ export default function App() {
         setHasMore(false);
       }
     } finally {
-      if (nonce === requestId.current) setLoadingMessages(false);
+      if (nonce === requestId.current) {
+        setLoadingMessages(false);
+        if (forum) setBusy(false);
+      }
     }
   }
   async function openGuild(id: string, info = session) {
@@ -570,21 +604,35 @@ export default function App() {
       if (nonce === requestId.current) setLoadingMessages(false);
     }
   }
-  async function loadThreads() {
+  async function loadThreads(more = false) {
     if (!channel) return;
+    const nonce = requestId.current;
     setShowThreads(true);
     setBusy(true);
     try {
-      const result = await bridge.threads(channel);
-      setThreadView(result.threads);
-      if (result.warnings.length) setError(result.warnings.join(" "));
+      const result = await bridge.threadPage(
+        channel,
+        more ? threadCursor : undefined,
+      );
+      if (nonce !== requestId.current) return;
+      setThreadView((previous) => [
+        ...new Map(
+          [...(more ? previous : []), ...result.threads].map((t) => [t.id, t]),
+        ).values(),
+      ]);
+      setThreadCursor(result.cursor);
+      setThreadWarnings(result.warnings);
     } catch (e) {
-      setError((e as Error).message);
+      if (nonce === requestId.current) setError((e as Error).message);
     } finally {
-      setBusy(false);
+      if (nonce === requestId.current) setBusy(false);
     }
   }
   const scopedChannels = guildId ? guild?.channels || [] : session?.dms || [];
+  const isForum = !!channel && [15, 16].includes(channel.type);
+  const forumParent = guild?.channels.find(
+    (c) => c.id === channel?.parent_id && [15, 16].includes(c.type),
+  );
   const visibleMessages = useMemo(
     () =>
       messages.filter((m) =>
@@ -881,6 +929,16 @@ export default function App() {
                 <main className="conversation">
                   <div className="conversation-header">
                     <div className="conversation-name">
+                      {forumParent && (
+                        <button
+                          className="icon-button"
+                          aria-label="Back to forum"
+                          title="Back to forum"
+                          onClick={() => void openChannel(forumParent)}
+                        >
+                          <ArrowLeft size={18} />
+                        </button>
+                      )}
                       {channel ? (
                         <IconForChannel c={channel} size={22} />
                       ) : (
@@ -917,8 +975,14 @@ export default function App() {
                         <>
                           <button
                             className="icon-button"
-                            aria-label="Browse threads"
-                            title="Browse active and archived threads"
+                            aria-label={
+                              isForum ? "Refresh posts" : "Browse threads"
+                            }
+                            title={
+                              isForum
+                                ? "Refresh forum posts"
+                                : "Browse active and archived threads"
+                            }
                             onClick={() => void loadThreads()}
                           >
                             <MessageSquare size={19} />
@@ -942,8 +1006,16 @@ export default function App() {
                       <div className="message-search">
                         <Search size={14} />
                         <input
-                          aria-label="Search loaded messages"
-                          placeholder="Search loaded messages"
+                          aria-label={
+                            showThreads
+                              ? "Search loaded posts"
+                              : "Search loaded messages"
+                          }
+                          placeholder={
+                            showThreads
+                              ? "Search loaded posts"
+                              : "Search loaded messages"
+                          }
                           value={query}
                           onChange={(e) => setQuery(e.target.value)}
                         />
@@ -969,47 +1041,98 @@ export default function App() {
                   {showThreads ? (
                     <div className="thread-browser">
                       <div className="section-heading">
-                        <h2>Threads in #{channel && nameOf(channel)}</h2>
-                        <button
-                          className="icon-button"
-                          aria-label="Close threads"
-                          onClick={() => setShowThreads(false)}
-                        >
-                          <X size={18} />
-                        </button>
+                        <h2>
+                          {isForum ? "Posts" : "Threads"} in #
+                          {channel && nameOf(channel)}
+                        </h2>
+                        {!isForum && (
+                          <button
+                            className="icon-button"
+                            aria-label="Close threads"
+                            onClick={() => setShowThreads(false)}
+                          >
+                            <X size={18} />
+                          </button>
+                        )}
                       </div>
-                      {busy ? (
-                        <LoaderCircle className="spin" />
+                      <p className="forum-description">
+                        {threadView.length} loaded · choose a post to read it,
+                        or use + to collect the whole thread.
+                      </p>
+                      {threadWarnings.length > 0 && (
+                        <div className="forum-notices" role="status">
+                          {threadWarnings.map((warning, i) => (
+                            <p key={i}>{warning}</p>
+                          ))}
+                        </div>
+                      )}
+                      {busy && !threadView.length ? (
+                        <div className="loading-state">
+                          <LoaderCircle className="spin" size={25} />
+                          <p>Loading {isForum ? "forum posts" : "threads"}…</p>
+                        </div>
                       ) : threadView.length ? (
-                        threadView.map((t) => (
-                          <div className="thread-card" key={t.id}>
-                            <button onClick={() => void openChannel(t)}>
-                              <MessageCircle size={23} />
-                              <div>
-                                <strong>{nameOf(t)}</strong>
-                                <span>
-                                  {t.thread_metadata?.archived
-                                    ? "Archived thread"
-                                    : "Active thread"}
-                                </span>
-                              </div>
-                              <ArrowRight size={17} />
-                            </button>
-                            <Pick
-                              item={channelSelection(t)}
-                              selected={selected}
-                              toggle={toggle}
-                            />
-                          </div>
-                        ))
+                        threadView
+                          .filter((t) =>
+                            nameOf(t)
+                              .toLowerCase()
+                              .includes(query.toLowerCase()),
+                          )
+                          .map((t) => (
+                            <div className="thread-card" key={t.id}>
+                              <button onClick={() => void openChannel(t)}>
+                                <MessageCircle size={23} />
+                                <div>
+                                  <strong>{nameOf(t)}</strong>
+                                  <span>
+                                    {t.thread_metadata?.archived
+                                      ? "Archived"
+                                      : "Active"}
+                                    {typeof t.message_count === "number"
+                                      ? ` · ${t.message_count} messages`
+                                      : ""}
+                                  </span>
+                                </div>
+                                <ArrowRight size={17} />
+                              </button>
+                              <Pick
+                                item={channelSelection(t)}
+                                selected={selected}
+                                toggle={toggle}
+                              />
+                            </div>
+                          ))
                       ) : (
                         <div className="empty-inline">
                           <MessageSquare size={32} />
-                          <h3>No threads available</h3>
+                          <h3>
+                            No {isForum ? "forum posts" : "threads"} loaded
+                          </h3>
                           <p>
-                            Threads this account can access will appear here.
+                            Refresh to check the posts this account can access.
                           </p>
+                          <button
+                            className="secondary"
+                            disabled={busy}
+                            onClick={() => void loadThreads()}
+                          >
+                            Try again
+                          </button>
                         </div>
+                      )}
+                      {threadCursor && (
+                        <button
+                          className="secondary load-posts"
+                          disabled={busy}
+                          onClick={() => void loadThreads(true)}
+                        >
+                          {busy ? (
+                            <LoaderCircle className="spin" size={15} />
+                          ) : (
+                            <Plus size={15} />
+                          )}
+                          Load more {isForum ? "posts" : "threads"}
+                        </button>
                       )}
                     </div>
                   ) : extraTab ? (

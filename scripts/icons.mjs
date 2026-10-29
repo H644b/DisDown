@@ -1,16 +1,18 @@
+import { pngOrigin } from "./png-origin.mjs";
 import sharp from "sharp";
 import { mkdir, readFile, writeFile, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 const svg = await readFile("public/logo.svg");
+const origin =
+  "Origin: original DisDown geometric vector monogram in public/logo.svg, rasterized by scripts/icons.mjs using Sharp. Lavender rounded square, dark D and inset download arrow. No generated or stock artwork.";
+const png = async (size) =>
+  pngOrigin(await sharp(svg).resize(size, size).png().toBuffer(), origin);
 await mkdir("build/icons", { recursive: true });
 for (const size of [16, 32, 48, 64, 128, 256, 512, 1024])
-  await sharp(svg)
-    .resize(size, size)
-    .png()
-    .toFile(`build/icons/${size}x${size}.png`);
-await sharp(svg).resize(512, 512).png().toFile("public/logo.png");
+  await writeFile(`build/icons/${size}x${size}.png`, await png(size));
+await writeFile("public/logo.png", await png(512));
 const sizes = [16, 32, 48, 64, 128, 256];
 const buffers = await Promise.all(
   sizes.map((size) => sharp(svg).resize(size, size).png().toBuffer()),

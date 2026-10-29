@@ -5,7 +5,7 @@ import { DiscordClient, type DataClient, id } from "./discord";
 import { DemoClient } from "../shared/demo";
 import { browse, createDirectory, exists } from "./filesystem";
 import { exportArchive, clean } from "./exporter";
-import type { Channel, ExportRequest } from "../shared/types";
+import type { Channel, ExportRequest, ThreadPage } from "../shared/types";
 let client: DataClient | undefined;
 let controller: AbortController | undefined;
 let window: BrowserWindow;
@@ -127,6 +127,18 @@ app.whenReady().then(async () => {
     id(channel.id);
     if (channel.guild_id) id(channel.guild_id);
     return active().threads(channel);
+  });
+  handle("threadPage", (channel: Channel, cursor?: ThreadPage["cursor"]) => {
+    id(channel.id);
+    if (channel.guild_id) id(channel.guild_id);
+    if (
+      cursor &&
+      (typeof cursor.archived !== "boolean" ||
+        !Number.isInteger(cursor.offset) ||
+        cursor.offset < 0)
+    )
+      throw new Error("Invalid thread page.");
+    return active().threadPage(channel, cursor);
   });
   handle("profile", (value: string, guildId?: string) =>
     active().profile(id(value), guildId ? id(guildId) : undefined),

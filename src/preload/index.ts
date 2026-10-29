@@ -11,6 +11,7 @@ const bridge: DisdownBridge = {
   guild: (id) => invoke("guild", id),
   messages: (id, before) => invoke("messages", id, before),
   threads: (channel) => invoke("threads", channel),
+  threadPage: (channel, cursor) => invoke("threadPage", channel, cursor),
   profile: (id, guild) => invoke("profile", id, guild),
   reactionUsers: (channel, message, emoji) =>
     invoke("reactionUsers", channel, message, emoji),

@@ -284,11 +284,7 @@ export async function collect(
         before = cursor;
       }
     }
-    if (
-      options.threads &&
-      c.guild_id &&
-      [0, 2, 5, 13, 15, 16].includes(c.type)
-    ) {
+    if (options.threads && c.guild_id && [0, 5, 15, 16].includes(c.type)) {
       try {
         const result = await client.threads(c, signal);
         archive.warnings.push(...result.warnings);
@@ -683,8 +679,17 @@ export async function exportArchive(
           { name: "manifest.json" },
         );
         for (const asset of media) zip.file(asset.file, { name: asset.name });
-        await zip.finalize();
-        await closed;
+        await Promise.all([zip.finalize(), closed]);
+      } catch (failure) {
+        zip.abort();
+        if (!outputStream.closed) {
+          const closing = new Promise<void>((resolve) =>
+            outputStream.once("close", resolve),
+          );
+          outputStream.destroy();
+          await closing;
+        }
+        throw failure;
       } finally {
         signal.removeEventListener("abort", abort);
       }

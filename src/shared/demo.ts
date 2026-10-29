@@ -304,6 +304,9 @@ export class DemoClient implements DataClient {
       warnings: [],
     };
   }
+  async threadPage(channel: Channel) {
+    return this.threads(channel);
+  }
   async profile(userId: string) {
     return {
       user: demoUsers.find((u) => u.id === userId) || demoUsers[0],

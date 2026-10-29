@@ -27,6 +27,11 @@ export interface DataClient {
     signal?: AbortSignal,
   ): Promise<Message[]>;
   threads(channel: Channel, signal?: AbortSignal): Promise<ThreadPage>;
+  threadPage(
+    channel: Channel,
+    cursor?: ThreadPage["cursor"],
+    signal?: AbortSignal,
+  ): Promise<ThreadPage>;
   profile(
     id: string,
     guildId?: string,
@@ -252,18 +257,19 @@ export class DiscordClient implements DataClient {
       .filter((c) => canView(c, guild, member, this.info.user.id))
       .map((c) => ({ ...c, guild_id: guildId }));
     let threads: Channel[] = [];
-    try {
-      const active = await this.get<{ threads: Channel[] }>(
-        `/guilds/${guildId}/threads/active`,
-        signal,
-      );
-      threads = active.threads
-        .filter((t) => channels.some((c) => c.id === t.parent_id))
-        .map((t) => ({ ...t, guild_id: guildId }));
-    } catch (e) {
-      if (signal?.aborted) throw e;
-      warnings.push(`Active threads: ${(e as Error).message}`);
-    }
+    if (this.mode === "bot")
+      try {
+        const active = await this.get<{ threads: Channel[] }>(
+          `/guilds/${guildId}/threads/active`,
+          signal,
+        );
+        threads = active.threads
+          .filter((t) => channels.some((c) => c.id === t.parent_id))
+          .map((t) => ({ ...t, guild_id: guildId }));
+      } catch (e) {
+        if (signal?.aborted) throw e;
+        warnings.push(`Active threads: ${(e as Error).message}`);
+      }
     const extras: GuildView["extras"] = [
       ...(guild.roles || []).map((r: Role) => ({
         kind: "role" as const,
@@ -307,6 +313,19 @@ export class DiscordClient implements DataClient {
     id(channel.id);
     const threads: Channel[] = [];
     const warnings: string[] = [];
+    if (this.mode === "user") {
+      let cursor: ThreadPage["cursor"];
+      do {
+        const page = await this.threadPage(channel, cursor, signal);
+        threads.push(...page.threads);
+        warnings.push(...page.warnings);
+        cursor = page.cursor;
+      } while (cursor);
+      return {
+        threads: [...new Map(threads.map((t) => [t.id, t])).values()],
+        warnings,
+      };
+    }
     if (channel.guild_id) {
       try {
         const active = await this.get<{ threads: Channel[] }>(
@@ -368,6 +387,45 @@ export class DiscordClient implements DataClient {
         ).values(),
       ],
       warnings,
+    };
+  }
+  async threadPage(
+    channel: Channel,
+    cursor?: ThreadPage["cursor"],
+    signal?: AbortSignal,
+  ): Promise<ThreadPage> {
+    id(channel.id);
+    if (this.mode === "bot") return this.threads(channel, signal);
+    const archived = cursor?.archived ?? false;
+    const offset = cursor?.offset ?? 0;
+    if (!Number.isInteger(offset) || offset < 0 || offset > 1000000)
+      throw new Error("Invalid thread page.");
+    const result = await this.get<{ threads: Channel[]; has_more: boolean }>(
+      `/channels/${channel.id}/threads/search?sort_by=last_message_time&sort_order=desc&archived=${archived}&limit=25&offset=${offset}`,
+      signal,
+    );
+    const threads = result.threads.map((t) => ({
+      ...t,
+      guild_id: channel.guild_id,
+      parent_id: t.parent_id || channel.id,
+    }));
+    if (!threads.length && !archived && !result.has_more)
+      return this.threadPage(channel, { archived: true, offset: 0 }, signal);
+    if (!threads.length && result.has_more)
+      return {
+        threads,
+        warnings: [
+          "Discord returned an empty thread page with more results indicated. Refresh this forum to retry.",
+        ],
+      };
+    return {
+      threads,
+      warnings: [],
+      cursor: result.has_more
+        ? { archived, offset: offset + result.threads.length }
+        : !archived
+          ? { archived: true, offset: 0 }
+          : undefined,
     };
   }
   async profile(userId: string, guildId?: string, signal?: AbortSignal) {
