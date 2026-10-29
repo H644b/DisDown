@@ -13,7 +13,9 @@ Updated October 28, 2026 (America/New_York).
 | Save completion, download state, minimum 1000×680 window | Desktop UI captures and tests | Passed locally |
 | Cancel cleanup, attachment host restrictions, escaped HTML, CSV formula protection | Export invariant tests | Passed locally |
 | Production dependency audit | npm audit --omit=dev | 0 reported vulnerabilities at check time |
-| Live Discord account access | Local user-token session: 116 servers, 136 DMs/groups; history, profiles, reaction users, server metadata and thread-discovery requests | Passed for checked content; 6 permission/access notices; populated live threads and live saving still pending |
+| Live Discord account access | Local user-token session: 116 servers, 136 DMs/groups; history, profiles, reaction users, server metadata and thread-discovery requests | Passed for checked content; notices preserved for unavailable access. Live ZIP/media save and populated archived thread save also verified. |
+| Live ZIP and attachment | Inspected HTML, JSON, manifest, 4 messages and a real downloaded attachment | Passed locally, 0 export warnings |
+| Live archived thread | Discovered populated archived threads, read history and saved a 2-message limited thread archive | Passed; limit and metadata verified |
 | macOS arm64 distributable | Local DMG/ZIP packaging + packaged app launch | Passed locally; final reviewed build pending |
 | macOS Intel distributable | Native GitHub Actions runner | Pending |
 | Windows x64 distributable | Native GitHub Actions runner | Pending |

@@ -2108,6 +2108,7 @@ function FolderPicker({
               </button>
               <input
                 aria-label="Folder path"
+                disabled={loading}
                 value={path}
                 onChange={(e) => setPath(e.target.value)}
                 placeholder="Absolute folder path"
@@ -2116,6 +2117,7 @@ function FolderPicker({
                 className="icon-button"
                 title="Go to folder"
                 aria-label="Go to folder"
+                disabled={loading}
               >
                 <ArrowRight size={16} />
               </button>
@@ -2124,6 +2126,7 @@ function FolderPicker({
                 type="button"
                 title="Refresh folder"
                 aria-label="Refresh folder"
+                disabled={loading}
                 onClick={() => void navigate(listing?.path)}
               >
                 <RefreshCw size={15} />
@@ -2141,6 +2144,7 @@ function FolderPicker({
               </div>
               <button
                 className="text-link"
+                disabled={loading || !listing || path !== listing.path}
                 onClick={() => setNewFolder(!newFolder)}
               >
                 <Plus size={14} />
@@ -2245,7 +2249,16 @@ function FolderPicker({
           <button
             className="primary"
             disabled={!listing || loading}
-            onClick={() => listing && onChoose(listing.path)}
+            onClick={() => {
+              setLoading(true);
+              void bridge.browse(path).then(
+                (verified) => onChoose(verified.path),
+                (failure) => {
+                  setLocalError(failure.message);
+                  setLoading(false);
+                },
+              );
+            }}
           >
             Use this folder <Check size={16} />
           </button>

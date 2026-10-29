@@ -20,7 +20,11 @@ test.beforeEach(async () => {
         ? ["--no-sandbox"]
         : []),
     ],
-    env: { ...process.env, DISDOWN_DEV_URL: "", DISDOWN_TEST_HEADLESS: "1" },
+    env: {
+      ...process.env,
+      DISDOWN_DEV_URL: "",
+      DISDOWN_TEST_HEADLESS: process.env.CI ? "" : "1",
+    },
   });
   page = await app.firstWindow();
   await page.waitForLoadState("domcontentloaded");
@@ -215,7 +219,7 @@ test("themed picker creates folder, writes real export and protects existing fil
     .getByRole("button", { name: "Save collection", exact: true })
     .click();
   await page.getByLabel("Folder path").fill(path.join(folder, "My archive"));
-  await page.getByLabel("Go to folder", { exact: true }).click();
+  // Confirming a typed path must validate that path, even before pressing Go.
   await page.getByRole("button", { name: "Use this folder" }).click();
   await expect(
     page.getByRole("button", { name: "Replace file", exact: true }),

@@ -53,6 +53,7 @@ async function createWindow() {
       sandbox: true,
       webSecurity: true,
       spellcheck: false,
+      backgroundThrottling: false,
     },
   });
   window.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
