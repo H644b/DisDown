@@ -1,62 +1,127 @@
 ---
 name: "DisDown"
-description: "A familiar charcoal desktop client for collecting and saving Discord content."
+description: "The implemented v0.2.0 Discord-near desktop archive interface, with connected-account appearance."
 colors:
-  accent: "#bba5f5"
-  accent-dark: "#282132"
-  primary-hover: "#ccbafa"
-  rail: "#1c1d23"
-  sidebar: "#24252d"
-  main: "#2b2c35"
-  panel: "#25262e"
-  input: "#1f2027"
-  border: "#3c3d48"
-  muted: "#b0b1c2"
-  text: "#f0f0f6"
-  secondary: "#3b3c48"
-  secondary-hover: "#474856"
-  success: "#9ed7b4"
-  warning: "#f1cb8b"
+  accent: "#5865f2"
+  accent-hover: "#4752c4"
+  white: "#ffffff"
+  main: "#36373e"
+  sidebar: "#323339"
+  rail: "#2c2d32"
+  surface: "#393a41"
+  raised: "#3c3d45"
+  text: "#f3f3f4"
+  heading: "#ffffff"
+  muted: "#abacb2"
+  control-border: "#9da0aa"
+  border: "color-mix(in srgb, #f3f3f4 15%, #36373e)"
+  hover: "color-mix(in srgb, #f3f3f4 7%, #36373e)"
+  selected: "color-mix(in srgb, #f3f3f4 13%, #36373e)"
+  selection-bg: "color-mix(in srgb, #5865f2 20%, #36373e)"
+  link: "#a6b9ff"
+  focus: "#9faeff"
+  button-focus: "#92a7ff"
+  input-focus: "#8c9cff"
+  caret: "#aebaff"
+  notice-bg: "#343025"
+  notice-text: "#f1ce8a"
+  error-bg: "#41292c"
+  error-text: "#ffb9b6"
+  success: "#7dd3a6"
+  success-bg: "#17352a"
+  light-main: "#fbfbfb"
+  light-sidebar: "#fbfbfb"
+  light-rail: "#f3f3f4"
+  light-surface: "#ffffff"
+  light-raised: "#ffffff"
+  light-text: "#2e2e34"
+  light-muted: "#5d5e66"
+  light-heading: "#28282d"
+  darker-main: "#202024"
+  darker-sidebar: "#1a1a1e"
+  darker-rail: "#121214"
+  darker-surface: "#242429"
+  darker-raised: "#28282d"
+  darker-text: "#efeff1"
+  darker-muted: "#96979e"
+  darker-heading: "#fbfbfb"
+  midnight-main: "#000000"
+  midnight-sidebar: "#000000"
+  midnight-rail: "#000000"
+  midnight-surface: "#0a0a0c"
+  midnight-raised: "#121214"
+  midnight-text: "#d4d5d8"
+  midnight-muted: "#81828a"
+  midnight-heading: "#dcdcdf"
+  light-input: "#eeeeef"
+  light-control-border: "#767680"
+  custom-dark-control-border: "#d0d1d8"
+  custom-light-control-border: "#464651"
+  light-border: "#d7d7dc"
+  light-hover: "color-mix(in srgb, #2e2e34 6%, #fbfbfb)"
+  light-selected: "color-mix(in srgb, #2e2e34 12%, #fbfbfb)"
+  light-selection-bg: "#e5e9ff"
+  light-link: "#3457c7"
+  light-focus: "#5865f2"
+  light-notice-bg: "#fff2d9"
+  light-notice-text: "#705214"
+  light-error-bg: "#fce5e5"
+  light-error-text: "#9f292d"
+  light-success: "#247644"
+  light-success-bg: "#e4f1e8"
 typography:
-  display:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
-    fontSize: "46px"
-    fontWeight: 700
-    lineHeight: 1.16
-    letterSpacing: "-1.8px"
-  headline:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
-    fontSize: "32px"
-    fontWeight: 700
-    letterSpacing: "-1px"
-  title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
-    fontSize: "26px"
-    fontWeight: 720
-    lineHeight: 1.3
-    letterSpacing: "-0.65px"
-  body:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
-    fontSize: "12px"
+  base:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "14px"
     fontWeight: 400
-    lineHeight: 1.65
+  body:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "15px"
+    fontWeight: 400
+    lineHeight: 1.55
+  headline:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1.4
+    letterSpacing: "-0.4px"
+  save-title:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "26px"
+    fontWeight: 700
+    lineHeight: 1.4
+    letterSpacing: "-0.4px"
+  connection-title:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "-0.4px"
+  section:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "14px"
+    fontWeight: 600
+    lineHeight: 1.5
   label:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
     fontSize: "13px"
-    fontWeight: 650
+    fontWeight: 600
+    lineHeight: 1.3
+  navigation:
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "13px"
+    fontWeight: 500
   metadata:
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
-    fontSize: "11px"
+    fontFamily: "\"Noto Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    fontSize: "10px"
     fontWeight: 400
 rounded:
-  compact: "6px"
-  field: "7px"
-  control: "8px"
-  destination: "10px"
-  save: "11px"
-  dialog: "14px"
-  server: "15px"
-  panel: "16px"
+  compact: "3px"
+  control: "4px"
+  reaction: "5px"
+  dialog: "7px"
+  panel: "8px"
+  server: "13px"
   circle: "50%"
 spacing:
   compact: "4px"
@@ -64,230 +129,289 @@ spacing:
   small: "12px"
   medium: "16px"
   large: "20px"
+  content: "24px"
   section: "28px"
+  roomy: "32px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
-    textColor: "{colors.accent-dark}"
+    textColor: "{colors.white}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "12px 18px"
+    padding: "10px 16px"
   button-primary-hover:
-    backgroundColor: "{colors.primary-hover}"
+    backgroundColor: "{colors.accent-hover}"
   button-secondary:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.text}"
+    backgroundColor: "{colors.raised}"
+    textColor: "{colors.muted}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "12px 18px"
-  button-secondary-hover:
-    backgroundColor: "{colors.secondary-hover}"
+    padding: "10px 16px"
   input-default:
-    backgroundColor: "{colors.input}"
+    backgroundColor: "{colors.rail}"
     textColor: "{colors.text}"
-    rounded: "{rounded.field}"
-    padding: "11px 12px"
+    rounded: "{rounded.control}"
+    padding: "10px 12px"
   server-navigation:
     backgroundColor: "{colors.rail}"
     width: "72px"
-    padding: "19px 0 16px"
-  channel-navigation-active:
-    backgroundColor: "#3d374f"
-    textColor: "#e5d9fd"
-    rounded: "{rounded.compact}"
-    padding: "0 7px"
-    height: "34px"
-  selection-toggle:
-    backgroundColor: "#ffffff05"
-    textColor: "#aaa6bb"
-    rounded: "{rounded.compact}"
+    padding: "12px 0"
+  server-icon:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.server}"
+    size: "44px"
     padding: "0"
-    size: "23px"
-  selection-toggle-checked:
-    backgroundColor: "#bba5f52b"
-    textColor: "#dfd1ff"
-  reaction-chip:
-    backgroundColor: "#34313f"
-    rounded: "{rounded.compact}"
-    padding: "0 5px"
-    height: "28px"
-  attachment-card:
-    backgroundColor: "#24252e"
+  channel-navigation-active:
+    backgroundColor: "{colors.selected}"
+    textColor: "{colors.muted}"
+    typography: "{typography.navigation}"
     rounded: "{rounded.control}"
-    padding: "13px"
+    padding: "0 8px"
+    height: "35px"
+  selection-toggle:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.control}"
+    size: "20px"
+    padding: "0"
+  selection-toggle-checked:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.white}"
+  reaction-chip:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.reaction}"
+    padding: "0 6px"
+    height: "30px"
+  attachment-card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.control}"
+    padding: "14px"
+  format-row-active:
+    backgroundColor: "{colors.selected}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.control}"
+    padding: "15px 12px"
   save-action:
     backgroundColor: "{colors.accent}"
-    textColor: "#2a2136"
-    rounded: "{rounded.save}"
-    padding: "18px 24px"
+    textColor: "{colors.white}"
+    rounded: "{rounded.control}"
+    padding: "15px 20px"
   folder-dialog:
-    backgroundColor: "#29262f"
+    backgroundColor: "{colors.sidebar}"
     rounded: "{rounded.dialog}"
-    width: "850px"
-    height: "560px"
+    width: "860px"
+    height: "580px"
 ---
 
 # Design System: DisDown
 
 ## Overview
 
-**Creative North Star: "The Discord-style archive client"**
+**Creative North Star: "The familiar Discord archive"**
 
-DisDown uses familiar desktop client density: charcoal navigation, a slate conversation plane, quiet separators, and muted lavender selection ink. System UI typography keeps conversation content and controls easy to scan. This record covers the Electron-hosted renderer for macOS, Windows, and Linux, as implemented in `src/renderer/App.tsx` and `src/renderer/styles.css`.
+DisDown follows the current Discord desktop grammar selected by the user: compact navigation, readable conversations, ordinary selection controls, and settings-like export screens. The implemented v0.2.0 world replaces the rejected lavender and marketing treatment. The original D-and-download monogram remains recognizable in blurple and white.
 
-Brand appears in the original D-and-download monogram, rounded square server marks, and the deliberate save moment. Most surfaces stay flat and tonal; the large Save collection control receives the lavender glow. Selection remains visible beside its source content, while the collection and export stages provide a steady path to a local archive.
+Connected-account appearance supplies the surfaces, text, and interaction roles throughout browsing, export settings, saving, and the folder picker. Fixed blurple actions establish continuity across base modes, presets, and custom gradients. Density and familiar behavior carry the interface; brand expression stays in the monogram and the subtle glow on Save export.
 
 **Key Characteristics:**
-- Tonal charcoal surfaces with one lavender interaction accent.
-- Compact desktop controls, readable transcripts, and independent scrolling regions.
-- Explicit plus/check selection controls and persistent collection feedback.
-- A restrained save animation, with stable reduced-motion states.
-- Original geometric branding and consistent Lucide outline icons.
+
+- Account-derived base palettes and gradients, with fixed blurple primary actions.
+- Self-hosted Noto Sans, clear transcript hierarchy, and compact rectangular controls.
+- Independent desktop scroll regions and a persistent selection summary with Continue.
+- Explicit unchecked and checked selection states beside the source content.
+- A purposeful transfer animation with static reduced-motion progress information.
+
+This is a scan-mode record of the implemented renderer, not a seed. Its authority is `src/renderer/App.tsx`, `src/renderer/styles.css`, `src/renderer/theme.ts`, `src/shared/discord-theme-facts.json`, and `public/logo.svg`; the direction contract remains in `.impeccable/surfaces/src-renderer-app-tsx.md`. The frontmatter holds normative primitives for the standard Dark base and explicitly named variants. Runtime appearance overrides are authoritative; the pre-effect CSS fallback is not another visual identity.
+
+Visual evidence is the fabricated-data capture set in `.impeccable/review/`: `browser.png`, `minimum-window.png`, `light-browser.png`, `blurple-browser.png`, `options.png`, `blurple-options.png`, `save.png`, and `picker.png`. The latest scoped verdict accepted the two finish fixes for unchecked controls and footer occlusion; it is not a new whole-app review.
 
 ## Colors
 
-The palette is cool charcoal with a muted lavender accent. The frontmatter preserves the source values; the names below explain their roles.
+The neutral palette follows the account. Blurple remains the stable primary action and the original brand color; gradients provide account appearance rather than a second marketing palette.
 
 ### Primary
 
-- **Lavender ink** (`accent`): primary actions, active stages and server marks, links, selection outlines, carets, and keyboard focus.
-- **Plum ink** (`accent-dark`): dark text and icons on the lavender primary controls.
-- **Lifted lavender** (`primary-hover`): the standard primary button hover state. The larger Save collection button has its own brighter hover treatment in the component snippet.
+- **Discord blurple** (`accent`): primary actions, checked selection controls, active server fallback, native checkboxes, bot labels, and progress. **Pressed blurple** (`accent-hover`) supplies the primary hover state.
+- **White action ink** (`white`): text and icons on blurple controls and the original monogram. It does not switch to the account's ordinary text role.
+- **Readable links and focus** (`link`, `focus`): theme-aware link ink, compound-field focus borders, and radio outlines. Ordinary button focus, simple-input focus, and caret retain the fixed source roles `button-focus`, `input-focus`, and `caret`.
 
 ### Secondary
 
-- **Quiet green** (`success`): connected-session status. The completed save uses related green surfaces and icon colors, recorded in the save-state source rather than promoted into a second brand accent.
-- **Warm amber** (`warning`): forum access and loading notices, using the existing source warning color.
+- **Success green** (`success`, `success-bg`): connected status and completed-export surfaces.
+- **Notice amber** (`notice-text`, `notice-bg`): consent policy and access/export notices. Forum notices currently consume the same fixed dark amber through the source warning role.
+- **Error red** (`error-text`, `error-bg`): error semantics. Inline errors and the top error notice use error text; do not infer that every error is rendered on the error background role.
 
 ### Neutral
 
-- **Deep rail** (`rail`): the outer server navigation and compact connection segmentation.
-- **Charcoal sidebar** (`sidebar`): channel navigation and inset conversation embeds.
-- **Slate conversation** (`main`): the main transcript and export flow canvas.
-- **Charcoal tray** (`panel`): the persistent collection and inspector region.
-- **Recessed field** (`input`): default text fields.
-- **Fine divider** (`border`): repeated row, section, and control separators.
-- **Soft white** (`text`) and **lavender gray** (`muted`): primary copy and secondary UI copy.
-- **Raised neutral** (`secondary`) and its hover tone (`secondary-hover`): secondary action buttons.
+- **Conversation plane** (`main`): transcript and full export-stage canvas.
+- **Navigation plane** (`sidebar`): channel tree; also the base for the selection panel (`--panel`).
+- **Outer frame** (`rail`): server rail; also the base title bar and Dark input role. Light inputs use `light-input`.
+- **Inset and raised planes** (`surface`, `raised`): attachments, embeds, reactions, secondary controls, and local hover surfaces.
+- **Content ink** (`text`, `heading`, `muted`): body content, primary headings, and secondary labels. The Light muted role is the value actually returned by the theme function, rather than the unused muted value in the raw Light facts.
+- **Interaction boundaries** (`control-border`): visible unchecked boxes. **Dividers and states** (`border`, `hover`, `selected`, `selection-bg`) use the exact source color mixes; selected messages receive the dedicated selection surface.
 
-**The Selection Ink Rule.** Use lavender for active navigation, selected objects, focus, links, and the next primary action. Keep connection and completed-save feedback in the established green family.
+**The Account Appearance Rule.** Use the consumed semantic CSS roles from theme.ts. Resolve the connected appearance once for the whole renderer, including export settings, Save, and the folder picker; do not substitute a fixed brand wash.
 
-Amber forum and export notices and pale red inline errors remain semantic feedback. Server and author colors belong to the content; they do not replace the interface palette. Translucent lavender washes on selected messages and selection controls stay translucent so the underlying content plane remains visible.
+**The Control Border Rule.** Unchecked selection controls use --control-border at full opacity. Decorative dividers use --border; they must not stand in for an interactive boundary.
+
+### Base variants
+
+The prefixed `light-*`, `darker-*`, and `midnight-*` primitives are the implemented account variants, not optional redesign palettes. Dark is the default for demo/bot sessions and unavailable appearance. System resolves to Dark or Light from the OS color-scheme preference. Darker uses deeper charcoal; Midnight uses black main/sidebar/rail planes with slightly raised inset surfaces. The base `--panel` follows sidebar; `--titlebar` follows rail; dark input follows rail. Blurple, its hover state, and white action ink stay fixed. Link, focus, notice, error, and success roles switch to their Light variants for a Light base.
+
+A Light account with the dark-sidebar option uses the Darker rail/sidebar surfaces and a local channel-sidebar text/input/divider override. Preserve that scoped override rather than darkening the transcript or picker. Custom themes use the separate `custom-dark-control-border` or `custom-light-control-border` before text tinting.
+
+### Presets and custom gradients
+
+The following catalog is the consumed 24-preset snapshot from `discord-theme-facts.json` (source checked 2026-10-28). A preset determines its base, color stops, and angle. The table records gradient recipes, not additional flat-color primitives.
+
+| ID | Preset | Base | Angle | Color stops |
+| --- | --- | --- | --- | --- |
+| 0 | Mint Apple | light | 180° | #56b69f 6.15%, #63bc61 48.7%, #9eca67 93.07% |
+| 1 | Citrus Sherbert | light | 180° | #f3b336 31.1%, #ee8558 67.09% |
+| 2 | Retro Raincloud | light | 148.71° | #3a7ca1 5.64%, #7f7eb9 26.38%, #7f7eb9 49.92%, #3a7ca1 73.12% |
+| 3 | Hanami | light | 38.08° | #efaab3 3.56%, #efd696 35.49%, #a6daa2 68.78% |
+| 4 | Sunrise | light | 154.19° | #9f4175 8.62%, #c49064 48.07%, #a6953d 76.04% |
+| 5 | Cotton Candy | light | 180.14° | #f4abb8 8.5%, #b1c2fc 94.28% |
+| 6 | Lofi Vibes | light | 179.52° | #a4c0f7 7.08%, #a9e4e8 34.94%, #b0e2b8 65.12%, #cfdfa2 96.23% |
+| 7 | Desert Khaki | light | 38.99° | #e7dbd0 12.92%, #dfd0b2 32.92%, #e0d6a3 52.11% |
+| 8 | Sunset | darker | 141.68° | #48288c 27.57%, #db7f4b 71.25% |
+| 9 | Chroma Glow | darker | 128.92° | #0eb5bf 3.94%, #4c0ce0 26.1%, #a308a7 39.82%, #9a53ff 56.89%, #218be0 76.45% |
+| 10 | Forest | darker | 162.27° | #142215 11.2%, #2d4d39 29.93%, #454c32 48.64%, #5a7c58 67.85%, #a98e4b 83.54% |
+| 11 | Crimson Moon | darker | 64.92° | #950909 16.17%, #000000 72% |
+| 12 | Midnight Blurple | darker | 48.17° | #5348ca 11.21%, #140730 61.92% |
+| 13 | Mars | darker | 170.82° | #895240 14.61%, #8f4343 74.62% |
+| 14 | Dusk | darker | 180° | #665069 12.84%, #91a3d1 85.99% |
+| 15 | Under The Sea | darker | 179.14° | #647962 1.91%, #588575 48.99%, #6a8482 96.35% |
+| 16 | Easter Egg | light | 180° | #7289da 4%, #4e5d94 96% |
+| 17 | Retro Storm | darker | 148.71° | #3a7ca1 5.64%, #58579a 26.38%, #58579a 49.92%, #3a7ca1 73.12% |
+| 18 | Neon Nights | darker | 180° | #01a89e 0%, #7d60ba 50%, #b43898 100% |
+| 19 | Sepia | darker | 69.98° | #857664 14.14%, #5b4421 60.35% |
+| 20 | Strawberry Lemonade | darker | 161.03° | #af1a6c 18.79%, #c26b20 49.76%, #e7a525 80.72% |
+| 21 | Aurora | darker | 239.16° | #062053 10.39%, #191fbb 26.87%, #13929a 48.31%, #218573 64.98%, #051a81 92.5% |
+| 22 | Blurple Twilight | darker | 47.61° | #2c3fe7 11.18%, #261d83 64.54% |
+| 23 | Hexagon | darker | 135° | #4645ff 0%, #af01f3 33.33%, #ff6698 66.67%, #f89a03 100% |
+
+The shared `--app-background` carries the linear gradient. Transparent main/sidebar/rail/titlebar role overlays reveal it; preset Dark overlays use chat/sidebar/rail/frame opacities (0.8 / 0.85 / 0.9 / 0.7), and Light uses (0.85 / 0.8 / 0.85 / 0.65). The selection panel follows the sidebar overlay. Inputs, inset surfaces, and text are separately tinted by the theme function. Do not flatten these roles into a single screenshot color.
+
+Returned custom colors, stops, angle, and intensity drive the same pipeline. Intensity changes both tint and overlay opacity; a single supplied color is repeated to form a valid gradient. Preserve the returned recipe and the source formulas instead of inventing preset matches. Blurple Twilight is preset 22 with the Darker base; it is an account variant, not DisDown's default palette.
 
 ## Typography
 
-**Display and Body Font:** the platform UI stack defined in the frontmatter, with Segoe UI and sans-serif fallback. The system face is part of the familiar desktop client language. The renderer has a base size (14px), with a compact transcript and control hierarchy.
+**Display and Body Font:** self-hosted Noto Sans, followed by the platform fallbacks in the frontmatter. The renderer imports Latin weights (400, 500, 600, 700) from `@fontsource/noto-sans` in `src/renderer/main.tsx`, with font synthesis disabled. No display face is introduced. Code retains its browser monospace presentation.
 
 ### Hierarchy
 
-- **Display:** the welcome heading, with the second line highlighted in lavender. It reduces at the compact-width breakpoint (39px).
-- **Headline:** the configuration heading. The save-stage heading is a neighboring size (31px), reducing in short windows (28px).
-- **Title:** the channel introduction. It grows on wide desktop windows (28px).
-- **Body:** transcript copy. Paragraphs use a slightly looser line height (1.7) and a bounded measure (72ch); wide windows increase text size (13px) and measure (75ch).
-- **Label:** ordinary primary and secondary actions. Smaller channel and metadata labels retain the same family and clear weight differences.
-- **Metadata:** small support text. Existing timestamps and secondary content labels vary by context; those one-off sizes are not a replacement body scale.
+- **Base:** the desktop UI foundation. The body role is reserved for transcript content.
+- **Body:** message copy at the frontmatter size and line height, with a bounded measure (75ch), preserved whitespace, and wrapping for long content. It becomes smaller at compact width (14px) and larger at wide width (16px).
+- **Headline:** export-settings heading; the channel-introduction heading shares its size, weight, and tracking. Connection and Save have the separately recorded heading roles.
+- **Section:** settings groups and compact section labels. The folder-dialog title is slightly larger (16px), while the conversation header uses (15px, 700).
+- **Label and navigation:** compact actions and channel targets with distinct weight. Author names use (14px, 600); descriptions and many secondary labels use (12–13px).
+- **Metadata:** timestamps, small type labels, and contextual information. Account/status hints may use the neighboring source size (11px). Category labels are uppercase content at (10px, 700) with modest tracking (0.3px).
 
-Headings use balanced wrapping. Dates, message counts, and numeric fields use tabular numerals where the source specifies them. Code and raw structured data retain their code presentation.
+Headings balance wrapping. Timestamps, dates, and numeric fields use tabular numerals where specified. Keep transcript reading size distinct from metadata; do not revive the former tiny message scale or promotional display headings.
 
 ## Layout
 
-The renderer fills the window (100dvh). The outer body does not scroll; each long content region owns its scroll. The title bar has a fixed height (56px), three aligned regions, and a macOS traffic-light inset (94px left padding).
+The Electron renderer fills the window (100dvh). The outer document does not scroll; the rail, channel list, transcript, selection/inspector, settings page, and picker directory list own their scroll regions. The usual window is (1480 × 960) and the minimum is (1000 × 680), as enforced in `src/main/index.ts`.
 
-The browsing surface has four zones: a server rail (72px), channel sidebar (232px), flexible conversation, and collection tray (286px). Conversation and sidebar headers align at the same height (62px). The tray footer stays at the bottom while its selected-item list scrolls. The configuration view uses a centered container (1140px maximum), two unequal columns (1.08fr / 1fr), and a gap (65px), with a sticky bottom action bar. The save view centers a narrower content column (520px maximum). These are the current surface compositions; the surface brief retains their task-specific strategy.
+Browsing has a compact draggable title bar (36px), then four zones: server rail (72px), channel sidebar (248px), flexible conversation, and export selection (264px). The source headers are (49px), preserving the approximately 48px Discord header rhythm with their divider. macOS reserves left title-bar space (88px). The selection footer remains available while the list scrolls; Continue is disabled until a selection exists.
 
-Spacing is compact and contextual. Reused gaps and insets are captured in the frontmatter, with smaller content-specific adjustments in the source. Preserve this density instead of imposing a new strict grid.
+Settings use a centered content region (1100px maximum), outer padding (28px 48px 0), two flexible columns (1.1fr / 1fr), and a gap (56px). Its action footer is sticky at the bottom and must occlude content beneath it. Save uses a quiet left-aligned form within a centered content column (560px maximum), with outer padding (30px 42px). Keep those settings and destination surfaces operational and compact.
 
 ### Desktop adaptation
 
-- **At and above the wide width (1550px):** the channel sidebar grows (252px), the collection tray grows (310px), transcript text and measure increase, and header/search spacing expands.
-- **At and below the compact width (1200px):** the rail, sidebar, and collection become narrower (65px / 207px / 250px). The topic and its divider hide, search narrows, and content padding and column gaps reduce. The four browsing zones remain present.
-- **At and below the compact height (800px):** welcome spacing and the connection panel tighten; the save illustration and save title reduce; the empty collection uses less vertical space.
-- **Window bounds:** the Electron shell starts at 1480 × 960 and enforces a minimum of 1000 × 680, as recorded in `src/main/index.ts`. The reviewed minimum-window capture confirms the compact desktop composition.
+- **Wide width, at least 1650px:** sidebar grows to (280px), selection pane to (288px), transcript to (16px), channel targets to (14px), and message search to (200px).
+- **Compact width, at most 1200px:** rail/sidebar/selection widths become (64px / 214px / 238px). Topic and divider hide; search narrows to (150px); transcript becomes (14px); settings column gap reduces to (36px). All four browsing zones remain available.
+- **Compact height, at most 780px:** connection spacing tightens, welcome aligns to the top, Save's top margin reduces, and flow-heading spacing contracts. Content continues scrolling inside its region.
 
-The destination dialog is bounded to the window: a fixed preferred size (850 × 560), full available width at most, a viewport-height cap (90vh), and surrounding backdrop padding (30px). Its shortcut column and directory list scroll within the dialog.
+The folder picker has a preferred size (860 × 580), maximum width of the available space, a height cap (90vh), and backdrop padding (28px). Its shortcut column (154px) and directory list scroll independently. These are desktop adaptations; no phone layout is implemented.
+
+Spacing follows the compact values in the frontmatter with source-specific adjustments, rather than an invented global grid. Long names truncate in navigation and selection rows; body content and raw data wrap within their region.
 
 ## Elevation & Depth
 
-Everyday navigation and conversation surfaces use tonal layering and fine separators. Shadows are soft and localized. The destination dialog combines a diffuse shadow with a dimmed, blurred backdrop; blur marks protected dialog focus. The save illustration and requested glowing Save collection button carry the strongest ambient depth.
+Everyday client regions are flat, separated by account-derived tone and thin lines. Connection has a small localized shadow; the folder picker uses a large diffuse shadow over a dimmed backdrop. Save export alone receives the requested subtle blurple glow. No hover lift, orbit, or floating illustration remains in this implementation.
 
 ### Shadow Vocabulary
 
-- **Primary hover:** a small black lift on an enabled primary button.
-- **Embed inset:** a near-invisible inner top highlight on conversation embeds.
-- **Save illustration:** diffuse dark depth beneath the archive glyph.
-- **Save action:** a lavender ambient glow and a soft lower shadow, strengthened on hover.
-- **Folder dialog:** a large diffuse black shadow above the blurred backdrop.
+- **Connection:** a focused credential panel above the main plane.
+- **Save action:** a restrained blurple glow, slightly strengthened on hover.
+- **Folder dialog:** deep diffuse separation from the dimmed application.
 
-Exact shadow values are stored in `.impeccable/design.json`, outside the frontmatter schema.
+The sidecar records the exact source shadow and motion values. Its synthesized eight-step color ramps are panel previews, not new runtime palette tokens.
 
-**The Tonal Surface Rule.** Separate the everyday client regions through their charcoal values and fine dividers. Reserve large soft shadows for the destination dialog and the save moment.
+**The Tonal Surface Rule.** Separate everyday regions with account-theme surface roles and thin dividers. Keep diffuse shadows localized to connection, the folder dialog, and the Save action.
+
+The sticky settings footer layers the account gradient beneath its main-surface overlay using a fixed background attachment. This makes the footer visually continuous with the theme while completely covering scrolled controls and text; a lone translucent main overlay is insufficient.
 
 ## Shapes
 
-Rounded rectangles carry controls and surfaces. Compact navigation and selection controls use the smaller corner steps; fields and ordinary buttons are slightly softer. The welcome connection panel and destination dialog have more generous corners. Server marks are rounded squares; user avatars and stage dots are circular. Fine borders distinguish selected controls, attachments, and repeated rows.
+Controls and content blocks use compact rounded rectangles. Most fields, buttons, channel rows, attachments, and embeds share the control radius. Small selection variants and picker rows use the compact radius; reactions are slightly softer. The connection panel and folder dialog use their own modest radii. User avatars and radio indicators stay circular.
 
-The original monogram in `public/logo.svg` combines a lavender rounded square, a dark D, and a downward archive arrow. Use the vector as the source for packaged raster derivatives, following `docs/ASSETS.md`. Lucide outline icons use the renderer's consistent stroke weight (1.8). Emoji in reactions remain conversation content.
+Server artwork fills its complete box (44 × 44) with `object-fit: cover`, clipped by the server radius (13px). Do not add internal image padding. Missing or failed artwork uses up to two initials; animated server artwork switches to GIF on hover when reduced motion is not requested. An active server keeps a narrow left indicator (4px wide, 28px tall). Initials and account-provided avatar colors are content, not new brand tokens.
+
+The original vector in `public/logo.svg` uses the blurple rounded square with a white D and downward arrow. Keep that source as the basis for package icons and preserve its geometry. Lucide icons use a consistent renderer stroke weight (1.9), with heavier selection checks (3).
 
 ## Components
 
 ### Buttons
 
-Ordinary actions are compact, solid, and clear. Primary and secondary actions share their padding and corner shape from the frontmatter, with a minimum height (42px) and an icon-label gap (10px). Primary actions use lavender and dark ink; secondary actions use the raised neutral. Hover changes the surface tone, with only a small lift on the primary action. Disabled controls reduce opacity (0.45) and stop advertising clickability.
+Solid, compact actions. Standard primary and secondary buttons share their frontmatter padding and radius, a minimum height (38px), and icon-label gap (8px). Primary uses blurple and white; hover uses the darker blurple. Secondary uses the account raised surface and muted label. No translation or shadow lift is added. Disabled controls reduce opacity (0.45).
 
-Keyboard focus uses a lavender outline (2px) outside the control (3px offset). Small icon controls are square (28px), with gently rounded corners (6px), muted icons at rest, and a faint light surface on hover. Text links use lavender, a small underline offset (3px), and an underline on hover.
+Ordinary button/summary/tabindex keyboard focus is an outline (2px) with an offset (2px), using `button-focus`. Small icon controls are (28 × 28) with the control radius and a quiet hover surface. Text links use the link role and underline on hover.
 
 ### Inputs / Fields
 
-Fields are recessed and softly rounded, with transparent borders at rest, a lavender border on focus, and a lavender caret. Placeholders use a cooler muted tone. Native checkboxes use the lavender accent and a compact square size (17px). Search, path, and filename fields combine the input with a shared dark container; preserve the containing field's visual boundaries and its accessible label.
+Fields use the account input plane, text, thin divider border, and control radius. Simple input focus uses `input-focus` (2px outline, -1px offset); compound token and filename fields use a `focus` border on focus-within. The fixed caret role remains in the source. Search/path fields are compact compositions rather than separate raised cards. Native checkboxes are (19px) and use blurple.
 
 ### Navigation
 
-Server marks use a rounded square (45px) with a stronger lavender active state and a slim, light active indicator. Channel rows are compact (34px), with muted labels at rest, a faint hover wash, and a plum-lavender active surface. Nested threads indent and reduce their row height. The stage navigation uses numbered circles, then completion checks, so progress remains explicit.
+The rail preserves full-size server artwork and initials. Channel rows keep navigation and export selection as separate controls: open the channel through its label, select it through its checkbox. The active row uses `selected`; hover uses `hover`. Standard rows are (35px), direct-message avatar rows (42px), and nested thread rows (29px) with left indentation (20px). The title-bar stages are plain text tabs for Browse, Export settings, and Save; they do not use the former numbered-circle sequence.
 
 ### Selection controls and reaction chips
 
-A plus becomes a check without moving the original object. The standard selection control is a compact outlined square (23px), with a smaller variant (19px). Selected controls keep their lavender tint and border. Message controls become fully visible on hover, keyboard focus, or selection. Selected messages receive a quiet row wash; the collection tray updates beside the transcript.
+The selection toggle is an empty outlined square at rest, becoming blurple with a white check when selected. It is not a plus icon. Standard size is (20px), small is (17px), and reaction selection is (14px). Channel, category, message, and reaction boundaries remain visible at full opacity; the profile-selection control over an avatar appears on row hover, focus, or selection. `aria-pressed` and explicit select/deselect labels carry the state.
 
-Reaction chips show the content emoji and count beside a separate selection control. They have a fine plum border, a dark plum surface, and a stronger selected state. This interaction selects material for export.
+Reaction chips have the recorded height, surface, and radius, with content emoji and count beside a separate selection control. Selected chips use `selection-bg` and a fine border. Inspecting or selecting a reaction remains an archive action; it does not send a Discord reaction.
 
 ### Cards / Containers
 
-Attachments are compact bordered horizontal containers with an outline file icon, a title and size, and a selection action. They use the ordinary control corner step and a bounded width (365px maximum). Conversation embeds are nearby tonal blocks with a subtle inset highlight and a bounded width (375px maximum). Lists, settings, and selected items primarily use separators and rows.
+Attachments use the inset surface, thin divider border, control radius, and recorded padding, bounded to (400px). Embeds use a nearby bounded width (430px) and compact padding (13px 14px). Polls, stickers, and message components use the same low-depth language. Keep in-context content and its selection control together; do not turn each message into a floating card.
 
-### Forum post rows
+The export selection pane mirrors checked items immediately and retains its count, removal controls, and persistent Continue. The same pane may display profile/raw-data details with a scrollable tree, while the footer remains visible.
 
-Forum channels open directly into paged post rows in the conversation region. The heading identifies the channel (“Posts in #…”), followed by the loaded-count and selection hint. This hint uses supporting text (11px), a relaxed line height (1.7), and modest vertical margins (12px above, 10px below).
+### Export settings
 
-Post rows reuse the existing thread-row presentation: vertical padding (18px), a fine bottom divider, and an icon/content gap (15px). A bold title (13px) sits above a muted status label (11px) with a small separation (6px). The main row action opens the post's messages; its adjacent plus/check control selects the whole thread. The header's Back to forum control returns to the parent post list.
+Format rows are spacious enough to scan (73px minimum), with a format icon, label, explanation, and circular radio mark (19px). Active uses `selected`; the ring and inner dot use `focus`. Content toggles remain ordinary settings rows divided by fine lines. Validation stays adjacent to the affected fields, and invalid dates disable Continue to save.
 
-Load more posts uses the existing secondary button, centered with vertical margins (22px). Forum access notices use warm amber and supporting text (11px), with vertical margins (16px); their meaning remains visible beside the loaded post list.
+### Save and progress
 
-### Save collection
+Save export is the full-width action (54px minimum) with white text and the subtle source glow. Filename and destination are ordinary fields above it. The in-progress transfer illustration appears only while saving, with archive/folder icons and three offset file marks. The detail text is driven by real export phases; a percentage appears only when the source can determine it. Preserve cancellation, overwrite confirmation, completion path, and warning disclosure.
 
-The requested save moment uses the widest lavender control, larger type (15px, weight 700), softer corners, a minimum height (58px), and the ambient glow recorded in the sidecar. The archive illustration is already visible at rest. During saving, small packets descend into it (1.9s cycles) while its surface pulses (2.5s cycles). A completed save changes the archive glyph to green and settles through a brief scale-and-blur transition (0.6s). Indeterminate progress has a moving wave (1.7s); determinate progress reports the real percentage.
-
-**The Save Ritual Rule.** The large glowing control and receiving-packet animation belong to saving a collection. Keep ordinary navigation and selection transitions brief and quiet.
-
-General button state transitions are short (0.16s); message hover is slightly shorter (0.15s). Loading spinners rotate linearly (1s). Reduced-motion preference disables animations, transitions, and smooth scrolling while keeping progress and state text visible.
+Control transitions take (0.12s); the file marks run (1.5s) with staggered delays (0 / 0.5s / 1s). Reduced motion removes animations, transitions, and smooth scrolling globally while keeping phase text, progress, and all actions usable.
 
 ### Folder picker
 
-The themed destination dialog contains a shortcut rail, editable path, filter, directory rows, optional new-folder row, and a fixed action footer. It opens with focus on an enabled control, contains forward and reverse Tab navigation, closes with Escape, and restores focus to the opener. Disabled files remain visible as context. Inline errors stay within the dialog, and Use this folder remains an explicit confirmation action.
+The themed picker is a contained dialog with header, shortcut navigation, editable path, refresh/parent controls, filter, new-folder action, scrollable entries, and fixed bottom actions. It inherits the same appearance as Save. Files remain visibly unavailable as destinations. Opening moves focus into the dialog; Tab is trapped, Escape closes it, and closing restores the previous focus. Empty, loading, and local error states occupy the directory region rather than breaking the dialog frame.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** use the existing charcoal layers and lavender interaction roles for new renderer controls.
-- **Do** keep selection controls explicit and show the checked state beside the original object.
-- **Do** preserve visible keyboard focus, the folder dialog focus boundary, and focus restoration on close.
-- **Do** retain scrollable content regions and accessible bottom actions at the minimum desktop window size.
-- **Do** honor reduced motion while preserving the real progress, completion, and error information.
-- **Do** derive packaged logo rasters from the original repository vector and retain the asset provenance record.
+- Do use the semantic theme roles for every renderer stage and keep primary action text white.
+- Do keep unchecked selection boundaries visible at rest and checked items visibly tied to their source.
+- Do fill the complete rounded server-icon box with available artwork and fall back to initials when it cannot load.
+- Do keep sample-data labels, permission notices, consent, and export warnings visible within the established hierarchy.
+- Do keep the sticky settings footer opaque over scrolled content in every account theme.
+- Do retain phase text, counts, progress, cancellation, and keyboard focus when motion is reduced.
 
 ### Don't:
 
-- **Don't** use the full lavender save glow on ordinary navigation or selection controls.
-- **Don't** rely on hover alone to reveal the focused or checked message controls.
-- **Don't** replace the original DisDown monogram or the consistent outline icon family with unrelated marks.
-- **Don't** use green completion styling for an incomplete save or hide export notices behind decorative success feedback.
+- Don't restore the rejected lavender wash, ornamental orbit, floating illustration, or inspirational headings.
+- Don't turn export settings into promotional cards or add product copy about internal theme-reading mechanisms.
+- Don't add a message composer or imply that export selection sends a reaction or changes Discord content.
+- Don't force gradients onto base themes or replace an account gradient with a fabricated palette.
+- Don't pad server artwork inside its icon or stretch circular avatars into rounded squares.
+- Don't report sampled captures or a scoped finish verdict as full live-account, release, or whole-app certification.
