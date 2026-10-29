@@ -20,7 +20,7 @@ test.beforeEach(async () => {
         ? ["--no-sandbox"]
         : []),
     ],
-    env: { ...process.env, DISDOWN_DEV_URL: "" },
+    env: { ...process.env, DISDOWN_DEV_URL: "", DISDOWN_TEST_HEADLESS: "1" },
   });
   page = await app.firstWindow();
   await page.waitForLoadState("domcontentloaded");
@@ -173,6 +173,18 @@ test("themed picker creates folder, writes real export and protects existing fil
     .getByRole("button", { name: "Save collection", exact: true })
     .click();
   await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Shift+Tab");
+  expect(
+    await page.evaluate(
+      () => !!document.activeElement?.closest("[role=dialog]"),
+    ),
+  ).toBe(true);
+  await page.keyboard.press("Tab");
+  expect(
+    await page.evaluate(
+      () => !!document.activeElement?.closest("[role=dialog]"),
+    ),
+  ).toBe(true);
   await page.getByLabel("Folder path").fill(folder);
   await page.getByLabel("Go to folder", { exact: true }).click();
   await page.getByRole("button", { name: "New folder", exact: true }).click();

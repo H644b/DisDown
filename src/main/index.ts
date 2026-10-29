@@ -35,6 +35,7 @@ function handle(name: string, fn: (...args: any[]) => unknown) {
 }
 async function createWindow() {
   window = new BrowserWindow({
+    show: process.env.DISDOWN_TEST_HEADLESS !== "1",
     width: 1480,
     height: 960,
     minWidth: 1000,

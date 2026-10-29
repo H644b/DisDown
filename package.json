@@ -67,7 +67,9 @@
         "zip"
       ],
       "hardenedRuntime": true,
-      "identity": null
+      "identity": "-",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "win": {
       "icon": "build/icon.ico",

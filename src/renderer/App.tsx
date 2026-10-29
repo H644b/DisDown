@@ -1234,18 +1234,6 @@ export default function App() {
                                 {m.embeds.map((embed, i) => (
                                   <div className="embed" key={i}>
                                     <div>
-                                      <span className="embed-type">
-                                        {String(
-                                          embed.provider &&
-                                            typeof embed.provider === "object"
-                                            ? (
-                                                embed.provider as {
-                                                  name: string;
-                                                }
-                                              ).name
-                                            : embed.type || "Link preview",
-                                        )}
-                                      </span>
                                       <button
                                         className="embed-title"
                                         onClick={() =>
@@ -2028,7 +2016,9 @@ function FolderPicker({
   const dialog = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const before = document.activeElement as HTMLElement | null;
-    dialog.current?.focus();
+    dialog.current
+      ?.querySelector<HTMLElement>("button:not(:disabled)")
+      ?.focus();
     function key(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
       if (e.key === "Tab" && dialog.current) {
@@ -2039,7 +2029,15 @@ function FolderPicker({
         ];
         const first = nodes[0],
           last = nodes.at(-1);
-        if (e.shiftKey && document.activeElement === first) {
+        if (!nodes.length) {
+          e.preventDefault();
+        } else if (
+          document.activeElement === dialog.current ||
+          !dialog.current.contains(document.activeElement)
+        ) {
+          e.preventDefault();
+          (e.shiftKey ? last : first)?.focus();
+        } else if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
           last?.focus();
         } else if (!e.shiftKey && document.activeElement === last) {

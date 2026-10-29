@@ -1,4 +1,5 @@
 import { _electron as electron } from "@playwright/test";
+process.env.DISDOWN_TEST_HEADLESS = "1";
 const executablePath = process.env.DISDOWN_EXECUTABLE;
 const app = await electron.launch(
   executablePath
