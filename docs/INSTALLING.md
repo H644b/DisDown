@@ -4,7 +4,7 @@ Choose packages from the GitHub release matching your architecture. A SHA256SUMS
 
 ## macOS
 
-Use `mac-arm64` for Apple Silicon or `mac-x64` for Intel. Open the DMG and drag DisDown to Applications, or unzip the ZIP into Applications. These initial builds do not have Developer ID signing or Apple notarization. macOS can show an unidentified-developer warning. Review the source and published checksums before deciding whether to allow the app through System Settings → Privacy & Security. Do not disable Gatekeeper globally.
+Use `mac-arm64` for Apple Silicon or `mac-x64` for Intel. Open the DMG and drag DisDown to Applications, or unzip the ZIP into Applications.
 
 ## Windows
 

@@ -17,7 +17,7 @@ Get the installer for your platform from [GitHub Releases](https://github.com/H6
 | Windows x64         | Setup EXE, portable EXE |
 | Linux x64           | AppImage, DEB           |
 
-Initial builds are not signed with a Developer ID, notarized by Apple, or signed with a Windows publisher certificate. Operating systems may show publisher warnings. This is distinct from the app’s test status. See [installation](docs/INSTALLING.md).
+Windows builds do not have a publisher signing certificate. See [installation](docs/INSTALLING.md).
 
 ## Before connecting
 
@@ -71,14 +71,11 @@ npm test               # API, permissions, scope, formats, files, cancellation
 npm run test:e2e       # Real Electron desktop interactions and saving
 npm run test:desktop   # Desktop launch smoke check
 npm run dist           # Build installers on the current OS
-npm run notarize:mac   # Sign/notarize both released Mac ZIPs using local credentials
 ```
 
 On Linux without a desktop session, run Electron checks under `xvfb-run --auto-servernum`. CI uses `--no-sandbox` only inside its disposable Linux test runner; shipped app code keeps renderer sandboxing enabled.
 
 The [verification matrix](docs/VERIFICATION.md) separates automated fixtures, live Discord access, and platform build evidence. The [architecture notes](docs/ARCHITECTURE.md) describe credentials, IPC, permissions, archive scope, and file writes.
-
-The [macOS notarization workflow](docs/NOTARIZATION.md) documents local signing credentials, resuming Apple submissions, ticket verification, and release replacement. Credentials are kept out of public CI.
 
 ## Privacy and security
 
