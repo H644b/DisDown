@@ -5,6 +5,11 @@ release/
 test-results/
 playwright-report/
 .env*
+*.p8
+*.p12
+*.pfx
+*.key
+*.certSigningRequest
 *.log
 .DS_Store
 .impeccable/mocks/

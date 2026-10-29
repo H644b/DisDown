@@ -20,6 +20,7 @@
     "icons": "node scripts/icons.mjs",
     "pack": "electron-builder --dir --publish never",
     "dist": "electron-builder --publish never",
+    "notarize:mac": "node scripts/notarize-macos.mjs",
     "verify:live": "node scripts/verify-live.mjs"
   },
   "dependencies": {
