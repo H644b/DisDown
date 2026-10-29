@@ -1,0 +1,45 @@
+# DisDown archive
+2026-10-28T12:00:00.000Z
+NOTICE: This archive contains fabricated sample data. It is not a real Discord conversation.
+
+## The Commons (sample data)
+{
+  "id": "20001",
+  "name": "The Commons (sample data)"
+}
+## #general
+{
+  "id": "30004",
+  "name": "general",
+  "type": 0
+}
+### Jules · 2026-10-28T13:12:00Z · 30004
+A small thought for today: the best part of this place is all the little things we share.
+
+The half-finished ideas. The links someone leaves at 2am. The projects that start with “what if.”
+
+💜 × 8  ✨ × 4
+
+### Alex Park · 2026-10-28T13:14:00Z · 30004
+Exactly this. I found a conversation from last spring that completely changed how I approached my project. Would love to keep more of those moments.
+
+
+
+
+
+Profiles
+{
+  "id": "10001",
+  "username": "alex.park",
+  "global_name": "Alex Park",
+  "accent_color": 9614494,
+  "bio": "Collecting good conversations. Building small things."
+}
+
+{
+  "id": "10002",
+  "username": "jules",
+  "global_name": "Jules",
+  "accent_color": 12229857,
+  "bio": "Design, long walks, and too many browser tabs."
+}

@@ -1,0 +1,14 @@
+node_modules/
+!dist/
+!dist/**
+.impeccable/review/
+.impeccable/config.local.json
+.impeccable/sample-serializer.mjs
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log

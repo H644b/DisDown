@@ -1,0 +1,17 @@
+{
+  "name": "disdown-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node scripts/serve.mjs",
+    "dev": "wrangler dev --ip 127.0.0.1 --port 8787",
+    "check": "node scripts/check.mjs",
+    "prepare-assets": "node scripts/prepare-assets.mjs",
+    "set-origin": "node scripts/set-origin.mjs",
+    "deploy:dry-run": "npm run check && wrangler deploy --dry-run",
+    "deploy": "npm run check && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.148.0"
+  }
+}

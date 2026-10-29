@@ -1,0 +1,2 @@
+# Keep the serializer's CSV bytes intact, including CRLF record endings.
+dist/assets/samples/*.csv -text whitespace=cr-at-eol
